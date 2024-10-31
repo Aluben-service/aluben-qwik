@@ -1,25 +1,25 @@
-import { component$ } from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
+import { component$ } from '@builder.io/qwik';
 
 export default component$(() => {
   return (
     <>
-      <h1>Hi 👋</h1>
-      <div>
-        Can't wait to see what you build with qwik!
-        <br />
-        Happy coding.
-      </div>
+      <input
+        autofocus
+        spellcheck={false}
+        autocomplete="off"
+        id="search"
+        placeholder="Search or Enter a URL"
+      />
+      <section id="controls">
+        <button onClick$={() => window.chemicalAction('back', 'web')}>Back</button>
+        <button onClick$={() => window.chemicalAction('forward', 'web')}>Forward</button>
+        <button onClick$={() => window.chemicalAction('reload', 'web')}>Reload</button>
+        <button onClick$={() => window.chemicalAction('close', 'web')}>Close</button>
+      </section>
+      <iframe
+        id="web"
+        class="web-frame"
+      />
     </>
   );
 });
-
-export const head: DocumentHead = {
-  title: "Welcome to Qwik",
-  meta: [
-    {
-      name: "description",
-      content: "Qwik site description",
-    },
-  ],
-};
