@@ -5,7 +5,7 @@
 /server
 
 # Development
-node_modules
+noe_modules
 .env
 *.local
 
