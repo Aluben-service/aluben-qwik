@@ -3,14 +3,10 @@ import { component$ } from '@builder.io/qwik';
 export default component$(() => {
   return (
     <>
-      <input
-        autofocus
-        spellcheck={false}
-        autocomplete="off"
-        id="search"
-        placeholder="Search or Enter a URL"
-      />
       <section id="controls">
+      <input
+        autofocus spellcheck={false} autocomplete="off" id="search" data-frame="web" data-auto-https data-search-engine="https://www.google.com/search?q=%s" placeholder="Search or Enter a URL" is="chemical-input"
+      />
         <button onClick$={() => window.chemicalAction('back', 'web')}>Back</button>
         <button onClick$={() => window.chemicalAction('forward', 'web')}>Forward</button>
         <button onClick$={() => window.chemicalAction('reload', 'web')}>Reload</button>
