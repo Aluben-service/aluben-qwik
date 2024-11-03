@@ -16,9 +16,13 @@ export const RouterHead = component$(() => {
       <script src="/chemical.components.js" defer></script>
 
       <link rel="canonical" href={loc.url.href} />
-      <link rel="stylesheet" href="/chemical.css"></link>
+      <link rel="stylesheet" href="/chemical.css"/>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+      <link rel="preconnect" href="https://fonts.googleapis.com"/>
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+      <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet"></link>
 
       {head.meta.map((m) => (
         <meta key={m.key} {...m} />
