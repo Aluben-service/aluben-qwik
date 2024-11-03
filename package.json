@@ -31,9 +31,6 @@
     "qwik": "qwik"
   },
   "devDependencies": {
-    "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.11.16",
-    "@mui/styled-engine": "^5.13.2",
     "@builder.io/qwik": "^1.9.1",
     "@builder.io/qwik-city": "^1.9.1",
     "@netlify/edge-functions": "^2.0.0",

@@ -20,9 +20,6 @@ if (meteorEnabled) {
   importScripts($meteor.config.files.worker || "/meteor/meteor.worker.js");
 }
 
-self.addEventListener('install', event => {
-  self.skipWaiting(); 
-});
 
 
 Object.defineProperty(self, "crossOriginIsolated", { value: true }); // Firefox fix
