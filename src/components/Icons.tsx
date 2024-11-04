@@ -69,8 +69,8 @@ export function CodeIcon(props: PropsOf<"svg">, key: string) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      width="17"
+      height="17"
       viewBox="0 0 24 24"
       {...props}
       key={key}
@@ -86,3 +86,45 @@ export function CodeIcon(props: PropsOf<"svg">, key: string) {
     </svg>
   );
 }
+
+export function BookmarkIcon(props: PropsOf<"svg">, key: string) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 24 24"
+      {...props}
+      key={key}
+    >
+      <path
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width={2}
+        d="m12 17.75l-6.172 3.245l1.179-6.873l-5-4.867l6.9-1l3.086-6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
+      ></path>
+    </svg>
+  );
+}
+
+export function PanelIcon(props: PropsOf<"svg">, key: string) {
+    return (
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="1em"
+  height="1em"
+  viewBox="0 96 960 960"
+  {...props}
+  key={key}
+>
+  <path
+    fill="currentColor"
+    d="M200 936q-33 0-56.5-23.5T120 856V296q0-33 23.5-56.5T200 216h560q33 0 56.5 23.5T840 296v560q0 33-23.5 56.5T760 936H200Zm360-80V296H200v560h360Z"
+  />
+</svg>
+    );
+  }
+
+

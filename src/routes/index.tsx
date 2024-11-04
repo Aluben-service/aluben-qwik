@@ -4,6 +4,8 @@ import {
   RefreshIcon,
   ArrowBackIcon,
   ArrowForwardIcon,
+  BookmarkIcon,
+  PanelIcon,
 } from "~/components/Icons";
 
 // Interface for Eruda
@@ -49,7 +51,11 @@ export default component$(() => {
   const addBookmark = $(() => {
     const currentUrl = store.web?.contentWindow?.location.href; // Get current iframe URL
     if (currentUrl && !store.bookmarks.includes(currentUrl)) {
-      store.bookmarks.push(currentUrl);
+      const bookmark = {
+        url: currentUrl,
+        name: store.web?.contentWindow?.prompt("Name: "),
+      };
+      store.bookmarks.push(JSON.stringify(bookmark));
       saveBookmarks(); // Save to localStorage
     }
   });
@@ -98,6 +104,11 @@ export default component$(() => {
     }
   });
 
+  const enterBookmark = $((bookmark: string) => {
+    const webElement = document.getElementById("web") as HTMLIFrameElement;
+    webElement.src = JSON.parse(bookmark).url;
+  });
+
   return (
     <>
       <section id="controls">
@@ -121,37 +132,44 @@ export default component$(() => {
           placeholder="Search or Enter a URL"
           is="chemical-input"
         />
-        <button onClick$={addBookmark}>Ab</button>
-        <button onClick$={toggleSidebar}>
-          {store.sidebarVisible ? "Hb" : "Sb"}
+        <button onClick$={addBookmark}>
+          <BookmarkIcon />
         </button>
         <button onClick$={toggleDevtools}>
           <CodeIcon />
         </button>
+        <button onClick$={toggleSidebar}>
+          <PanelIcon />
+        </button>
       </section>
 
-      {store.sidebarVisible && (
-        <aside class="sidebar">
-          <h2>Bookmarks</h2>
-          <ul>
-            {store.bookmarks.map((bookmark) => (
-              <li key={bookmark}>
-                <a href={bookmark} target="_blank" rel="noopener noreferrer">
-                  {bookmark}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </aside>
-      )}
+      <section id="container">
+        {store.sidebarVisible && (
+          <aside class="sidebar">
+            <h2>Bookmarks</h2>
+            <ul>
+              {store.bookmarks.map((bookmark) => (
+                <li key={bookmark}>
+                  <button
+                    class="bookmark"
+                    onClick$={() => enterBookmark(bookmark)}
+                  >
+                    {JSON.parse(bookmark).name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )}
 
-      <iframe
-        ref={(el) => {
-          store.web = el;
-        }}
-        id="web"
-        class="web-frame"
-      />
+        <iframe
+          ref={(el) => {
+            store.web = el;
+          }}
+          id="web"
+          class={`web-frame ${store.sidebarVisible ? 'sidebar-visible' : ''}`}
+          />
+      </section>
     </>
   );
 });
