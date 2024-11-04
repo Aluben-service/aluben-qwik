@@ -6,12 +6,44 @@ body {
     font-family: "Lexend", system-ui, -apple-system, sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 *,
 *::before,
 *::after {
     box-sizing: border-box;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes buttonHover {
+    0% {
+        transform: scale(1);
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+    100% {
+        transform: scale(1.05);
+        background-color: rgba(255, 255, 255, 0.4);
+    }
+}
+
+@keyframes slideInSidebar {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 #search {
@@ -25,6 +57,7 @@ body {
     border-radius: 16px;
     width: 42rem;
     max-width: calc(100% - 2rem);
+    animation: fadeIn 1.5s ease-in-out;
 }
 
 #controls {
@@ -35,12 +68,10 @@ body {
     height: 2.5rem;
     display: flex;
     justify-content: center;
-    /* Change this to center the items */
     align-items: center;
     padding: 0 0.5rem;
     gap: 0.5rem;
 }
-
 
 #controls button {
     background: rgba(255, 255, 255, 0.2);
@@ -52,6 +83,11 @@ body {
     user-select: none;
     border-radius: 6px;
     padding: 0.25rem 0.5rem;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+#controls button:hover {
+    animation: buttonHover 0.2s forwards;
 }
 
 #web,
@@ -70,34 +106,6 @@ body {
     transition: width 0.3s ease;
 }
 
-h1 {
-    margin: 0;
-    margin-bottom: 0.25rem;
-}
-
-p {
-    margin: 0;
-    margin-bottom: 2rem;
-}
-
-a {
-    color: inherit;
-}
-
-.close {
-    flex-grow: 0;
-    flex-shrink: 0;
-    position: relative;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path stroke='rgba(0, 0, 0, .65)' stroke-linecap='square' stroke-width='1.5' d='M0 0 L8 8 M8 0 L0 8'></path></svg>");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 8px 8px;
-}
-
-
 .sidebar {
     position: fixed;
     top: 2.5rem;
@@ -110,9 +118,8 @@ a {
     height: 100vh;
     overflow-y: auto;
     z-index: 1000;
-    transform: translateX(0);
+    animation: slideInSidebar 0.5s ease forwards;
 }
-
 
 .bookmark {
     background: none !important;
@@ -121,6 +128,24 @@ a {
     color: white;
     cursor: pointer;
     text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.bookmark:hover {
+    color: #b3b3b3;
+}
+
+.close {
+    flex-grow: 0;
+    flex-shrink: 0;
+    position: relative;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path stroke='rgba(0, 0, 0, .65)' stroke-linecap='square' stroke-width='1.5' d='M0 0 L8 8 M8 0 L0 8'></path></svg>");
+    background-position: center center;
+    background-repeat: no-repeat;   
+    background-size: 8px 8px;
 }
 
 #container {
@@ -129,4 +154,4 @@ a {
 
 .web-frame.sidebar-visible {
     width: calc(100% - 250px) !important; /* Adjust width when the sidebar is visible */
-  }
+}

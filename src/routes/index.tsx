@@ -1,4 +1,5 @@
 import { component$, $, useStore, useVisibleTask$ } from "@builder.io/qwik";
+import Swal from "sweetalert2";
 import {
   CodeIcon,
   RefreshIcon,
@@ -8,7 +9,6 @@ import {
   PanelIcon,
 } from "~/components/Icons";
 
-// Interface for Eruda
 interface ErudaWindow extends Window {
   eruda?: {
     init: () => void;
@@ -18,7 +18,6 @@ interface ErudaWindow extends Window {
   };
 }
 
-// Main component
 export default component$(() => {
   const store = useStore<{
     web: HTMLIFrameElement | null;
@@ -34,7 +33,7 @@ export default component$(() => {
 
   const isDevtoolsVisible = useStore({ visible: false });
 
-  // Load bookmarks from localStorage when the component mounts
+  // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(() => {
     const savedBookmarks = localStorage.getItem("bookmarks");
     if (savedBookmarks) {
@@ -42,65 +41,80 @@ export default component$(() => {
     }
   });
 
-  // Save bookmarks to localStorage
   const saveBookmarks = $(() => {
     localStorage.setItem("bookmarks", JSON.stringify(store.bookmarks));
   });
 
-  // Function to add a bookmark
-  const addBookmark = $(() => {
-    const currentUrl = store.web?.contentWindow?.location.href; // Get current iframe URL
-    if (currentUrl && !store.bookmarks.includes(currentUrl)) {
-      const bookmark = {
-        url: currentUrl,
-        name: store.web?.contentWindow?.prompt("Name: "),
-      };
-      store.bookmarks.push(JSON.stringify(bookmark));
-      saveBookmarks(); // Save to localStorage
+  const addBookmark = $(async () => {
+    const currentUrl = store.web?.contentWindow?.location.href;
+    if (currentUrl) {
+      const existingBookmark = store.bookmarks.find((bookmark) => {
+        const parsedBookmark = JSON.parse(bookmark);
+        return parsedBookmark.url === currentUrl;
+      });
+
+      if (!existingBookmark) {
+        const output = await Swal.fire({
+          title: "Name: ",
+          input: "text",
+          inputPlaceholder: "[Bookmark name]",
+          showCancelButton: true,
+          confirmButtonText: "Ok",
+        });
+        const bookmark = {
+          url: currentUrl,
+          name: output.value || "[Bookmark name]",
+        };
+        store.bookmarks.push(JSON.stringify(bookmark));
+        saveBookmarks();
+      } else {
+        Swal.fire({
+          title: "Bookmark already exists!",
+          text: `There already is a bookmark for this URL.`,
+          icon: "info",
+          confirmButtonText: "Ok",
+        });
+      }
     }
   });
 
-  // Toggle sidebar visibility
   const toggleSidebar = $(() => {
     store.sidebarVisible = !store.sidebarVisible;
   });
 
-  // Toggle devtools visibility
   const toggleDevtools = $(() => {
     const contentWindow = store.web?.contentWindow as ErudaWindow;
 
-    if (contentWindow) {
-      if (!contentWindow.eruda) {
-        const erudaScript = document.createElement("script");
-        erudaScript.src = "https://cdn.jsdelivr.net/npm/eruda";
-        contentWindow.document.body.append(erudaScript);
+    if (!contentWindow.eruda) {
+      const erudaScript = document.createElement("script");
+      erudaScript.src = "https://cdn.jsdelivr.net/npm/eruda";
+      contentWindow.document.body.append(erudaScript);
 
-        erudaScript.onload = () => {
-          contentWindow.eruda?.init();
-          const entryBtn = contentWindow.eruda?._$el[0]?.querySelector(
-            ".eruda-entry-btn"
-          ) as HTMLElement;
-          entryBtn.style.setProperty("display", "none");
+      erudaScript.onload = () => {
+        contentWindow.eruda?.init();
+        const entryBtn = contentWindow.eruda?._$el[0]?.querySelector(
+          ".eruda-entry-btn"
+        ) as HTMLElement;
+        entryBtn.style.setProperty("display", "none");
 
-          const toggleErudaVisibility = () => {
-            if (isDevtoolsVisible.visible) {
-              contentWindow.eruda?.hide();
-            } else {
-              contentWindow.eruda?.show();
-            }
-            isDevtoolsVisible.visible = !isDevtoolsVisible.visible;
-          };
-
-          toggleErudaVisibility();
+        const toggleErudaVisibility = () => {
+          if (isDevtoolsVisible.visible) {
+            contentWindow.eruda?.hide();
+          } else {
+            contentWindow.eruda?.show();
+          }
+          isDevtoolsVisible.visible = !isDevtoolsVisible.visible;
         };
+
+        toggleErudaVisibility();
+      };
+    } else {
+      if (isDevtoolsVisible.visible) {
+        contentWindow.eruda.hide();
       } else {
-        if (isDevtoolsVisible.visible) {
-          contentWindow.eruda?.hide();
-        } else {
-          contentWindow.eruda?.show();
-        }
-        isDevtoolsVisible.visible = !isDevtoolsVisible.visible;
+        contentWindow.eruda.show();
       }
+      isDevtoolsVisible.visible = !isDevtoolsVisible.visible;
     }
   });
 
@@ -167,8 +181,8 @@ export default component$(() => {
             store.web = el;
           }}
           id="web"
-          class={`web-frame ${store.sidebarVisible ? 'sidebar-visible' : ''}`}
-          />
+          class={`web-frame ${store.sidebarVisible ? "sidebar-visible" : ""}`}
+        />
       </section>
     </>
   );
