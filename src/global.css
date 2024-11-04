@@ -1,12 +1,36 @@
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: slateblue;
+    border-radius: 10px;
+}
+
+@font-face {
+    font-family: 'Lexend';
+    src: url("/Lexend.ttf");
+    font-display: swap;
+}
+
+html,
+body {
+    height: 100%;
+    /* Ensure full height */
+}
+
 body {
     margin: 0;
-    height: 100vh;
+    display: flex;
+    /* Added for flex layout */
+    flex-direction: column;
+    /* Stack children vertically */
     background: #212121;
     color: white;
     font-family: "Lexend", system-ui, -apple-system, sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
-    animation: fadeIn 0.5s ease-in-out;
 }
 
 *,
@@ -15,20 +39,12 @@ body {
     box-sizing: border-box;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
 @keyframes buttonHover {
     0% {
         transform: scale(1);
         background-color: rgba(255, 255, 255, 0.2);
     }
+
     100% {
         transform: scale(1.05);
         background-color: rgba(255, 255, 255, 0.4);
@@ -40,6 +56,7 @@ body {
         transform: translateX(100%);
         opacity: 0;
     }
+
     to {
         transform: translateX(0);
         opacity: 1;
@@ -62,7 +79,7 @@ body {
 
 #controls {
     position: fixed;
-    top: 0;
+    /* Keep controls fixed at the top */
     right: 0;
     left: 0;
     height: 2.5rem;
@@ -71,6 +88,8 @@ body {
     align-items: center;
     padding: 0 0.5rem;
     gap: 0.5rem;
+    z-index: 100;
+    /* Ensure it stays above other content */
 }
 
 #controls button {
@@ -94,11 +113,12 @@ body {
 .web-frame {
     position: fixed;
     top: 2.5rem;
+    /* Space for the controls */
     left: 0;
     bottom: 0;
     right: 0;
     width: 100%;
-    height: calc(100% - 2.5rem);
+    height: calc(100% - 5.0rem);
     border: none;
     background: #212121;
     user-select: none;
@@ -115,9 +135,9 @@ body {
     border-left: 1px solid #ccc;
     padding: 10px;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-    height: 100vh;
+    height: calc(100% - 2.5rem);
+    /* Adjust height to account for controls */
     overflow-y: auto;
-    z-index: 1000;
     animation: slideInSidebar 0.5s ease forwards;
 }
 
@@ -144,14 +164,29 @@ body {
     border-radius: 50%;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path stroke='rgba(0, 0, 0, .65)' stroke-linecap='square' stroke-width='1.5' d='M0 0 L8 8 M8 0 L0 8'></path></svg>");
     background-position: center center;
-    background-repeat: no-repeat;   
+    background-repeat: no-repeat;
     background-size: 8px 8px;
 }
 
 #container {
-    display: flex !important;
+    display: flex;
+    /* Ensure container uses flex */
+    flex: 1;
+    /* Allow it to grow */
+    margin-top: 2.5rem;
+    /* Push down by the height of the controls */
 }
 
 .web-frame.sidebar-visible {
-    width: calc(100% - 250px) !important; /* Adjust width when the sidebar is visible */
+    width: calc(100% - 250px) !important;
+    /* Adjust width when the sidebar is visible */
+}
+
+footer {
+    color: aliceblue;
+    padding: 1rem;
+    /* Footer padding */
+    margin-top: auto;
+    /* Push footer to the bottom */
+    font-size: 12px;
 }

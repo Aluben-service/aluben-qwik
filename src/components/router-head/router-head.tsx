@@ -15,19 +15,20 @@ export const RouterHead = component$(() => {
       <script
         data-wisp="wss://phantom.lol/wisp/"
         src="/chemical.js"
+        async
         defer
       ></script>
-      <script src="/chemical.components.js" defer></script>
+      <script src="/chemical.components.js" async defer></script>
 
       <link rel="canonical" href={loc.url.href} />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      {/*<link rel="preconnect" href="https://fonts.googleapis.com" />
       <link
         href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
         rel="stylesheet"
-      ></link>
+      ></link>*/}
 
       {head.meta.map((m) => (
         <meta key={m.key} {...m} />

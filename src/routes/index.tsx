@@ -1,5 +1,7 @@
 import { component$, $, useStore, useVisibleTask$ } from "@builder.io/qwik";
+import { DocumentHead } from "@builder.io/qwik-city";
 import Swal from "sweetalert2";
+//import localforage from "localforage";
 import {
   CodeIcon,
   RefreshIcon,
@@ -19,7 +21,7 @@ interface ErudaWindow extends Window {
 }
 
 export default component$(() => {
-  const store = useStore<{
+    const store = useStore<{
     web: HTMLIFrameElement | null;
     bookmarks: string[];
     newBookmark: string;
@@ -34,7 +36,7 @@ export default component$(() => {
   const isDevtoolsVisible = useStore({ visible: false });
 
   // eslint-disable-next-line qwik/no-use-visible-task
-  useVisibleTask$(() => {
+  useVisibleTask$(async () => {
     const savedBookmarks = localStorage.getItem("bookmarks");
     if (savedBookmarks) {
       store.bookmarks = JSON.parse(savedBookmarks);
@@ -126,38 +128,39 @@ export default component$(() => {
   return (
     <>
       <section id="controls">
-        <button onClick$={() => window.chemicalAction("forward", "web")}>
+        <button aria-label="Go forward" onClick$={() => window.chemicalAction("forward", "web")}>
           <ArrowForwardIcon />
         </button>
-        <button onClick$={() => window.chemicalAction("back", "web")}>
+        <button aria-label="Go back" onClick$={() => window.chemicalAction("back", "web")}>
           <ArrowBackIcon />
         </button>
-        <button onClick$={() => window.chemicalAction("reload", "web")}>
+        <button  aria-label="reload"onClick$={() => window.chemicalAction("reload", "web")}>
           <RefreshIcon />
         </button>
         <input
-          autofocus
+          autofocus={true}
           spellcheck={false}
           autocomplete="off"
           id="search"
           data-frame="web"
           data-auto-https
-          data-search-engine="https://www.google.com/search?q=%s"
+          data-service="uv"
+          data-search-engine="https://search.brave.com/search?q=%s"
           placeholder="Search or Enter a URL"
           is="chemical-input"
         />
-        <button onClick$={addBookmark}>
+        <button aria-label="Add a bookmark for the current page" onClick$={addBookmark}>
           <BookmarkIcon />
         </button>
-        <button onClick$={toggleDevtools}>
+        <button aria-label="Developer tools" onClick$={toggleDevtools}>
           <CodeIcon />
         </button>
-        <button onClick$={toggleSidebar}>
+        <button aria-label="Open sidebar" onClick$={toggleSidebar}>
           <PanelIcon />
         </button>
       </section>
 
-      <section id="container">
+      <main id="container">
         {store.sidebarVisible && (
           <aside class="sidebar">
             <h2>Bookmarks</h2>
@@ -181,9 +184,27 @@ export default component$(() => {
             store.web = el;
           }}
           id="web"
+          title="proxied website"
           class={`web-frame ${store.sidebarVisible ? "sidebar-visible" : ""}`}
         />
-      </section>
+      </main>
+      <footer>
+        &copy; 2024 Aluben Services, Inc.
+      </footer>
     </>
   );
 });
+
+export const head: DocumentHead = {
+  title: 'Aluben',
+  meta: [
+    {
+      name: 'description',
+      content: 'A clean and simple proxy browser built with Qwik.',
+    },
+    {
+      name: 'keywords',
+      content: 'qwik, aluben, proxy, browser, uv, ultraviolet, rammerhead, rh',
+    },
+  ],
+};
