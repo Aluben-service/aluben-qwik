@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 
-export const WebFrame = component$(({ store }) => {
+export const WebFrame = component$<{ store: any }>(({ store }) => {
   return (
     <iframe
       ref={(el) => {

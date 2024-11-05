@@ -11,8 +11,8 @@ interface ErudaWindow extends Window {
     };
   }
 
-export const Controls = component$(({ store }) => {
-          const isDevtoolsVisible = useStore({ visible: false });
+export const Controls = component$<{ store: any }>(({ store }) => {          
+  const isDevtoolsVisible = useStore({ visible: false });
     
       // eslint-disable-next-line qwik/no-use-visible-task
       useVisibleTask$(async () => {
