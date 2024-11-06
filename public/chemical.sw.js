@@ -1,4 +1,4 @@
-const rammerheadEnabled = false;
+const rammerheadEnabled = true;
 const meteorEnabled = false;
 const scramjetEnabled = false;
 const uvEnabled = true;
@@ -19,6 +19,8 @@ if (meteorEnabled) {
   importScripts($meteor.config.files.bundle || "/meteor/meteor.bundle.js");
   importScripts($meteor.config.files.worker || "/meteor/meteor.worker.js");
 }
+
+
 
 Object.defineProperty(self, "crossOriginIsolated", { value: true }); // Firefox fix
 
