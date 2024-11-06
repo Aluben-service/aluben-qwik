@@ -8,8 +8,8 @@ export default component$(() => {
         <div class="container mx-auto flex justify-between items-center">
           <div class="text-xl font-bold">Aluben</div>
           <div class="space-x-6">
-            <Link href="/home" class="hover:text-gray-300">Home</Link>
-            <Link href="/games" class="hover:text-gray-300">Search</Link>
+            <Link href="/" class="hover:text-gray-300">Home</Link>
+            <Link href="/home" class="hover:text-gray-300">Search</Link>
             <Link href="/leaderboard" class="hover:text-gray-300">Leaderboard(nonexistent)</Link>
             <Link href="/settings" class="hover:text-gray-300">Settings(nonexisttent)</Link>
           </div>
