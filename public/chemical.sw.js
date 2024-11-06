@@ -36,6 +36,11 @@ if (meteorEnabled) {
   meteor = new MeteorServiceWorker();
 }
 
+
+self.addEventListener('install', event => {
+  self.skipWaiting(); 
+});
+
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     (async () => {
