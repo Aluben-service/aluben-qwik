@@ -9,9 +9,9 @@ export default component$(() => {
           <div class="text-xl font-bold">GameHub</div>
           <div class="space-x-6">
             <Link href="/" class="hover:text-gray-300">Home</Link>
-            <Link href="/home" class="hover:text-gray-300">Games</Link>
-            <Link href="/leaderboard" class="hover:text-gray-300">Leaderboard</Link>
-            <Link href="/profile" class="hover:text-gray-300">Profile</Link>
+            <Link href="/home" class="hover:text-gray-300">Search</Link>
+            <Link href="/leaderboard" class="hover:text-gray-300">Leaderboard(nonexistent)</Link>
+            <Link href="/settings" class="hover:text-gray-300">Settings(nonexisttent)</Link>
           </div>
         </div>
       </nav>
