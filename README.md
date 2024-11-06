@@ -2,16 +2,14 @@
 
 Aluben is an official project of Aluben Services and Aluben Developer Labs. Aluben is a stunning, sleek, and functional web-proxy with support for thousands of popular sites. With Aluben, the sky is the limit.
 
-![license](https://img.shields.io/badge/License-GNU%20AGPL%20v3-blue)
-
-## Features
+<!-- ## Features
 
 - Stunning and highly functional UI
 - 3 different backend proxies
 - Hides your IP from sites
 - [List of officially supported sites](https://github.com/NebulaServices/Nebula/blob/dev/docs/officially-supported-sites.md)
 - Full mobile support
-- `about:blank` cloaking)
+- `about:blank` cloaking -->
 
 # Deployment
 
