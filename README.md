@@ -1,6 +1,6 @@
 # Nebula
 
-NebulaWeb is an official flagship of Nebula Services and Nebula Developer Labs. NebulaWeb is a stunning, sleek, and functional web-proxy with support for thousands of popular sites. With NebulaWeb, the sky is the limit.
+Aluben is an official project of Aluben Services and Aluben Developer Labs. Aluben is a stunning, sleek, and functional web-proxy with support for thousands of popular sites. With Aluben, the sky is the limit.
 
 ![license](https://img.shields.io/badge/License-GNU%20AGPL%20v3-blue)
 
@@ -48,6 +48,4 @@ Thanks for using Aluben!
 
 [ip grabber](https://aluben.org/)
 
-
 note: as of 11/5/2024 pacific time the [ip grabber](https://aluben.org/) isn't update to this repo.
-
