@@ -1,6 +1,7 @@
-import { component$, $, useStore, useVisibleTask$ } from "@builder.io/qwik";
+import { component$, $, useStore, useVisibleTask$, useContext } from "@builder.io/qwik";
 import { ArrowBackIcon, ArrowForwardIcon, RefreshIcon, BookmarkIcon, CodeIcon, PanelIcon } from "~/components/Icons";
 import Swal from "sweetalert2";
+import { GlobalContext } from '../../stores/global-store';
 
 interface ErudaWindow extends Window {
     eruda?: {
@@ -11,7 +12,8 @@ interface ErudaWindow extends Window {
     };
   }
 
-export const Controls = component$<{ store: any }>(({ store }) => {          
+export const Controls = component$<{ store: any }>(({ store }) => { 
+  const chemical = useContext(GlobalContext);         
   const isDevtoolsVisible = useStore({ visible: false });
     
       // eslint-disable-next-line qwik/no-use-visible-task
@@ -113,8 +115,9 @@ export const Controls = component$<{ store: any }>(({ store }) => {
         autocomplete="off"
         id="search"
         data-frame="web"
+        data-service={chemical.service}
         data-auto-https
-        data-search-engine="https://search.brave.com/search?q=%s"
+        data-search-engine={chemical.searchEngine}
         placeholder="Search or Enter a URL"
         is="chemical-input"
       />

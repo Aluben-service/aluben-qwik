@@ -6,6 +6,7 @@ import {
 } from "@builder.io/qwik-city";
 import { RouterHead } from "./components/router-head/router-head";
 import { isDev } from "@builder.io/qwik/build";
+import { GlobalStoreProvider } from './stores/global-store';
 
 import "./global.css";
 
@@ -18,6 +19,8 @@ export default component$(() => {
    */
 
   return (
+    <GlobalStoreProvider>
+
     <QwikCityProvider>
       <head>
         <meta charset="utf-8" />
@@ -34,5 +37,7 @@ export default component$(() => {
         {!isDev && <ServiceWorkerRegister />}
       </body>
     </QwikCityProvider>
+    </GlobalStoreProvider>
+
   );
 });
