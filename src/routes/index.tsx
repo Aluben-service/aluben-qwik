@@ -10,8 +10,8 @@ export default component$(() => {
           <div class="space-x-6">
             <Link href="/" class="hover:text-gray-300">Home</Link>
             <Link href="/home" class="hover:text-gray-300">Search</Link>
-            <Link href="/leaderboard" class="hover:text-gray-300">Leaderboard(nonexistent)</Link>
-            <Link href="/settings" class="hover:text-gray-300">Settings(nonexisttent)</Link>
+            <Link href="/leaderboard" class="hover:text-gray-300">Leaderboard(WIP)</Link>
+            <Link href="/settings" class="hover:text-gray-300">Settings(WIP)</Link>
           </div>
         </div>
       </nav>
