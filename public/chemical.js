@@ -1,6 +1,6 @@
 (async () => {
 const rammerheadEnabled = true;
-const meteorEnabled = true;
+const meteorEnabled = false;
 const scramjetEnabled = true;
 const uvEnabled = true;
 const defaultService = "uv";

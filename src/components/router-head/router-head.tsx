@@ -15,7 +15,7 @@ export const RouterHead = component$(() => {
       <title>{head.title}</title>
 
       <script
-        data-wisp={store.wisp}
+        data-wisp={store?.wisp}
         src="/chemical.js"
         async
         defer

@@ -31,9 +31,9 @@ export const Controls = component$<{ store: any }>(({ store }) => {
         autocomplete="off"
         id="search"
         data-frame="web"
-        data-service={chemical.service}
+        data-service={(chemical as any).service}
         data-auto-https
-        data-search-engine={chemical.searchEngine}
+        data-search-engine={(chemical as any).searchEngine}
         placeholder="Search or Enter a URL"
         is="chemical-input"
       />

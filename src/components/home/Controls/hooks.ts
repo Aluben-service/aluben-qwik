@@ -2,7 +2,7 @@ import { useStore, useVisibleTask$, useContext } from "@builder.io/qwik";
 import { GlobalContext } from '~/stores/global-store';
 
 export function useControls(store: any) {
-  const chemical = useContext(GlobalContext);
+  const chemical = useContext(GlobalContext);        
   const isDevtoolsVisible = useStore({ visible: false });
 
   // eslint-disable-next-line qwik/no-use-visible-task
