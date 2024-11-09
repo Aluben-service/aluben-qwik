@@ -47,3 +47,4 @@ node_modules
 
 #some test
 src/routes/bruh/
+package-lock.json
