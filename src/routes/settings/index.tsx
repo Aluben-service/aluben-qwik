@@ -2,7 +2,7 @@
 import { component$, useContext } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
 import styles from './settings.module.css';
-import { GlobalContext, useGlobalStore } from '../../stores/global-store';
+import { GlobalContext, useGlobalStore } from '~/stores/global-store.tsx';
 
 export default component$(() => {
   const chemical = useContext(GlobalContext);         

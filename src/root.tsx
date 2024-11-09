@@ -6,7 +6,7 @@ import {
 } from "@builder.io/qwik-city";
 import { RouterHead } from "./components/router-head/router-head";
 import { isDev } from "@builder.io/qwik/build";
-import { GlobalStoreProvider } from './stores/global-store';
+import { GlobalStoreProvider } from './stores/global-store.tsx';
 
 import "./global.css";
 

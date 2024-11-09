@@ -1,30 +1,20 @@
-import { component$ } from "@builder.io/qwik"
-import { Link } from "@builder.io/qwik-city"
-
+import { component$ } from "@builder.io/qwik";
+import { Navbar } from "~/components/Navbar";
 export default component$(() => {
   return (
     <div class="min-h-screen bg-gray-900 text-white">
-      <nav class="bg-gray-800 p-4">
-        <div class="container mx-auto flex justify-between items-center">
-          <div class="text-xl font-bold">Aluben</div>
-          <div class="space-x-6">
-            <Link href="/" class="hover:text-gray-300">Home</Link>
-            <Link href="/home" class="hover:text-gray-300">Search</Link>
-            <Link href="/leaderboard" class="hover:text-gray-300">Leaderboard(WIP)</Link>
-            <Link href="/settings" class="hover:text-gray-300">Settings(WIP)</Link>
-          </div>
-        </div>
-      </nav>
-      
+      <Navbar />
       <main class="container mx-auto py-12">
         <div class="text-center">
-          <h1 class="text-5xl font-bold mb-6">Welcome to Aluben</h1>
-          <p class="text-xl mb-8">Your ultimate gaming/watching/browsing destination</p>
-          <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-lg text-xl transition-colors">
+          <h1 class="mb-6 text-5xl font-bold">Welcome to Aluben</h1>
+          <p class="mb-8 text-xl">
+            Your ultimate gaming/watching/browsing destination
+          </p>
+          <button class="rounded-lg bg-green-500 px-8 py-3 text-xl font-bold text-white transition-colors hover:bg-green-600">
             Play Now
           </button>
         </div>
       </main>
     </div>
-  )
-})
+  );
+});

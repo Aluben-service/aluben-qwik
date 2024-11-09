@@ -1,6 +1,6 @@
 import { component$, useContext } from "@builder.io/qwik";
 import { useDocumentHead, useLocation } from "@builder.io/qwik-city";
-import { GlobalContext } from '../../stores/global-store';
+import { GlobalContext } from '~/stores/global-store.tsx';
 
 /**
  * The RouterHead component is placed inside of the document `<head>` element.

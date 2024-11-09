@@ -1,5 +1,5 @@
 import { component$, useStore } from "@builder.io/qwik";
-import { Controls } from "~/components/home/Controls";
+import { Controls } from "~/components/home/Controls/Controls";
 import { Sidebar } from "~/components/home/Sidebar";
 import { WebFrame } from "~/components/home/WebFrame";
 import type { DocumentHead } from "@builder.io/qwik-city";
