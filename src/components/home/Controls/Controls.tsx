@@ -31,7 +31,7 @@ export const Controls = component$<{ store: any }>(({ store }) => {
         autocomplete="off"
         id="search"
         data-frame="web"
-        data-service="scramjet"
+        data-service={chemical.service}
         data-auto-https
         data-search-engine={chemical.searchEngine}
         placeholder="Search or Enter a URL"
