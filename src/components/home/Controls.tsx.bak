@@ -1,7 +1,7 @@
 import { component$, $, useStore, useVisibleTask$, useContext } from "@builder.io/qwik";
 import { ArrowBackIcon, ArrowForwardIcon, RefreshIcon, BookmarkIcon, CodeIcon, PanelIcon } from "~/components/Icons";
 import Swal from "sweetalert2";
-import { GlobalContext } from '../../stores/global-store';
+import { useGlobalStore } from '../../stores/global-store';
 
 interface ErudaWindow extends Window {
     eruda?: {
@@ -13,7 +13,6 @@ interface ErudaWindow extends Window {
   }
 
 export const Controls = component$<{ store: any }>(({ store }) => { 
-  const chemical = useContext(GlobalContext);         
   const isDevtoolsVisible = useStore({ visible: false });
     
       // eslint-disable-next-line qwik/no-use-visible-task
