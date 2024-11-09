@@ -1,6 +1,6 @@
 const rammerheadEnabled = true;
-const meteorEnabled = false;
-const scramjetEnabled = false;
+const meteorEnabled = true;
+const scramjetEnabled = true;
 const uvEnabled = true;
 if (uvEnabled) {
   importScripts("/uv/uv.bundle.js");
