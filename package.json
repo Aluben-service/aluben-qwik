@@ -7,11 +7,15 @@
   "engines-annotation": "Mostly required by sharp which needs a Node-API v9 compatible runtime",
   "private": true,
   "trustedDependencies": [
+    "@netlify/esbuild",
     "@rubynetwork/rh",
     "bufferutil",
     "esbuild",
     "netlify-cli",
-    "sharp"
+    "protobufjs",
+    "sharp",
+    "sqlite3",
+    "utf-8-validate"
   ],
   "trustedDependencies-annotation": "Needed for bun to allow running install scripts",
   "type": "module",
@@ -35,29 +39,25 @@
     "@builder.io/qwik": "^1.9.1",
     "@builder.io/qwik-city": "^1.9.1",
     "@netlify/edge-functions": "^2.0.0",
-    "@types/bun": "latest",
     "@types/eslint": "8.56.10",
     "@types/node": "20.14.11",
     "@typescript-eslint/eslint-plugin": "7.16.1",
     "@typescript-eslint/parser": "7.16.1",
     "autoprefixer": "^10.4.20",
-    "chemicaljs": "^1.9.0",
+    "chemicaljs": "^2.3.1",
     "netlify-cli": "^15.0.0",
     "postcss": "^8.4.47",
     "prettier": "3.3.3",
     "prettier-plugin-tailwindcss": "^0.5.4",
     "tailwindcss": "^3.4.14",
     "typescript": "5.4.5",
-    "undici": "^6.20.1",
     "vite": "5.3.6",
     "vite-tsconfig-paths": "^4.3.2"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3",
     "localforage": "^1.10.0",
-    "mysql2": "^3.11.3",
-    "sqlite": "^5.1.1",
-    "sqlite3": "^5.1.7",
-    "sweetalert2": "^11.14.4"
+    "mousetrap": "^1.6.5",
+    "sweetalert2": "^11.14.4",
+    "wisp-server-node": "^1.1.7"
   }
 }

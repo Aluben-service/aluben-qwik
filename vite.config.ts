@@ -22,7 +22,7 @@ errorOnDuplicatesPkgDeps(devDependencies, dependencies);
  */
 export default defineConfig(({ command, mode }): UserConfig => {
   return {
-    plugins: [qwikCity(), qwikVite(), tsconfigPaths(), ChemicalVitePlugin({ default: 'uv', uv: true, rammerhead: true, experimental: { meteor: true, scramjet: true } })],
+    plugins: [qwikCity(), qwikVite(), tsconfigPaths(), ChemicalVitePlugin({ default: 'uv', uv: true, rammerhead: true, experimental: { scramjet: true } })],
     // This tells Vite which dependencies to pre-build in dev mode.
     optimizeDeps: {
       // Put problematic deps that break bundling here, mostly those with binaries.

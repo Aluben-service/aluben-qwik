@@ -1,6 +1,5 @@
 import { component$, useContext } from "@builder.io/qwik";
 import { useDocumentHead, useLocation } from "@builder.io/qwik-city";
-import { GlobalContext } from '~/stores/global-store.tsx';
 
 /**
  * The RouterHead component is placed inside of the document `<head>` element.
@@ -8,19 +7,19 @@ import { GlobalContext } from '~/stores/global-store.tsx';
 export const RouterHead = component$(() => {
   const head = useDocumentHead();
   const loc = useLocation();
-  const store = useContext(GlobalContext);
 
   return (
     <>
       <title>{head.title}</title>
-
+      
+      <script src="/chemical.components.js" async defer></script>
       <script
-        data-wisp={store?.wisp}
+        data-wisp-store
+        data-transport-store
         src="/chemical.js"
         async
         defer
       ></script>
-      <script src="/chemical.components.js" async defer></script>
 
       <link rel="canonical" href={loc.url.href} />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />

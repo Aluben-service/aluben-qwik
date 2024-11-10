@@ -1,4 +1,5 @@
 import { component$ } from "@builder.io/qwik";
+import { isBrowser } from '@builder.io/qwik/build';
 import { 
   ArrowBackIcon, 
   ArrowForwardIcon, 
@@ -11,8 +12,12 @@ import { useControls } from './hooks';
 import { createEventHandlers } from './eventHandlers';
 
 export const Controls = component$<{ store: any }>(({ store }) => {
-  const { chemical, isDevtoolsVisible } = useControls(store);
+  const { isDevtoolsVisible } = useControls(store);
   const { addBookmark, toggleDevtools } = createEventHandlers(store, isDevtoolsVisible);
+  let searchEngine;
+  if(isBrowser) {
+    searchEngine = localStorage.getItem("@chemical/searchEngine");
+  }
 
   return (
     <section id="controls">
@@ -31,9 +36,9 @@ export const Controls = component$<{ store: any }>(({ store }) => {
         autocomplete="off"
         id="search"
         data-frame="web"
-        data-service={(chemical as any).service}
+        data-service-store	
         data-auto-https
-        data-search-engine={(chemical as any).searchEngine}
+        {...(searchEngine ? { 'data-search-engine-store': true } : { 'data-search-engine': 'https://search.brave.com/search?q=%s' })}
         placeholder="Search or Enter a URL"
         is="chemical-input"
       />

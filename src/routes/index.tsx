@@ -1,20 +1,39 @@
-import { component$ } from "@builder.io/qwik";
-import { Navbar } from "~/components/Navbar";
+import { component$, useStore } from "@builder.io/qwik";
+import { Controls } from "~/components/Controls/";
+import { Sidebar } from "~/components/Sidebar";
+import { WebFrame } from "~/components/WebFrame";
+import type { DocumentHead } from "@builder.io/qwik-city";
+
 export default component$(() => {
+  const store = useStore({
+    web: null,
+    bookmarks: [],
+    newBookmark: "",
+    sidebarVisible: false,
+  });
+
   return (
-    <div class="min-h-screen bg-gray-900 text-white">
-      <Navbar />
-      <main class="container mx-auto py-12">
-        <div class="text-center">
-          <h1 class="mb-6 text-5xl font-bold">Welcome to Aluben</h1>
-          <p class="mb-8 text-xl">
-            Your ultimate gaming/watching/browsing destination
-          </p>
-          <button class="rounded-lg bg-blue-500 px-8 py-3 text-xl font-bold text-white transition-colors hover:bg-blue-600">
-            Play Now
-          </button>
-        </div>
+    <>
+      <Controls store={store} />
+      <main id="container">
+        {store.sidebarVisible && <Sidebar store={store} />}
+        <WebFrame store={store} />
       </main>
-    </div>
+      <footer>&copy; 2024 Aluben Services, Inc.</footer>
+    </>
   );
 });
+
+export const head: DocumentHead = {
+  title: 'Aluben',
+  meta: [
+    {
+      name: 'description',
+      content: 'A clean and simple proxy browser built with Qwik.',
+    },
+    {
+      name: 'keywords',
+      content: 'qwik, aluben, proxy, browser, uv, ultraviolet, rammerhead, rh',
+    },
+  ],
+};

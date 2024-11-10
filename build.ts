@@ -1,6 +1,6 @@
 import {ChemicalBuild} from "chemicaljs";
 const build = new ChemicalBuild({
-    path: "dists",
+    path: "dist",
     default: "uv",
     uv: true,
     experimental: { meteor: true, scramjet: true },

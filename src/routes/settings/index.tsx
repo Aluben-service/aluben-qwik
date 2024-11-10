@@ -1,12 +1,16 @@
 
-import { component$, useContext } from '@builder.io/qwik';
+import { component$ } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
 import styles from './settings.module.css';
-import { GlobalContext, useGlobalStore } from '~/stores/global-store.tsx';
+import { isBrowser } from '@builder.io/qwik/build';
+import Mousetrap from 'mousetrap';
 
 export default component$(() => {
-  const chemical = useContext(GlobalContext);         
-  const { actions } = useGlobalStore();
+  if (isBrowser) {
+    Mousetrap.bind(["command+k", "ctrl+k"], function () {
+      alert("a");
+    });
+  }
   return (
     <div class={styles.settingsContainer}>
       <h1>Settings</h1>
@@ -16,11 +20,16 @@ export default component$(() => {
         <h2>Account Settings</h2>
         <div class={styles.settingItem}>
         <label>Search Engine:</label>
+        <select is="chemical-select" data-default-store="service">
+    <option value="uv">Ultraviolet</option>
+    <option value="rammerhead">Rammerhead</option>
+    <option value="scramjet">Scramjet</option>
+    <option value="meteor">Meteor</option>
+</select> 
         <input 
           type="text" 
           class="text-black"
-          value={chemical.searchEngine} 
-          onInput$={(e) => actions.setsearchEngine((e.target as HTMLInputElement).value)}
+          onInput$={(e) => window.chemical.setStore("searchEngine", (e.target as HTMLInputElement).value)}
         />
         </div>
       </section>

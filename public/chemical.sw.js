@@ -1,6 +1,5 @@
 const rammerheadEnabled = true;
-const meteorEnabled = false;
-const scramjetEnabled = true;
+const scramjetEnabled = false;
 const uvEnabled = true;
 if (uvEnabled) {
   importScripts("/uv/uv.bundle.js");
@@ -8,25 +7,19 @@ if (uvEnabled) {
   importScripts(__uv$config.sw || "/uv/uv.sw.js");
 }
 if (scramjetEnabled) {
-  importScripts("/scramjet/scramjet.codecs.js");
-  importScripts("/scramjet/scramjet.config.js");
-  importScripts(__scramjet$config.bundle || "/scramjet/scramjet.bundle.js");
-  importScripts(__scramjet$config.worker || "/scramjet/scramjet.worker.js");
-}
-if (meteorEnabled) {
-  importScripts("/meteor/meteor.codecs.js");
-  importScripts("/meteor/meteor.config.js");
-  importScripts("/meteor/meteor.bundle.js");
-  importScripts("/meteor/meteor.worker.js");
-  //importScripts($meteor.config.files.bundle || "/meteor/meteor.bundle.js");
-  //importScripts($meteor.config.files.worker || "/meteor/meteor.worker.js");
+  importScripts("/scramjet/scramjet.wasm.js");
+  importScripts("/scramjet/scramjet.shared.js");
+  importScripts("/scramjet/scramjet.worker.js");
 }
 
+if (navigator.userAgent.includes("Firefox")) {
+  Object.defineProperty(globalThis, "crossOriginIsolated", {
+    value: true,
+    writable: false,
+  });
+}
 
-
-Object.defineProperty(self, "crossOriginIsolated", { value: true }); // Firefox fix
-
-let uv, scramjet, meteor;
+let uv, scramjet;
 
 if (uvEnabled) {
   uv = new UVServiceWorker();
@@ -34,24 +27,18 @@ if (uvEnabled) {
 if (scramjetEnabled) {
   scramjet = new ScramjetServiceWorker();
 }
-if (meteorEnabled) {
-  meteor = new MeteorServiceWorker();
-}
-
-
-self.addEventListener('install', event => {
-  self.skipWaiting(); 
-});
 
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     (async () => {
+      if (scramjetEnabled) {
+        await scramjet.loadConfig();
+      }
+
       if (uvEnabled && uv.route(event)) {
         return await uv.fetch(event);
       } else if (scramjetEnabled && scramjet.route(event)) {
         return await scramjet.fetch(event);
-      } else if (meteorEnabled && meteor.shouldRoute(event)) {
-        return meteor.handleFetch(event);
       }
       return await fetch(event.request);
     })()
