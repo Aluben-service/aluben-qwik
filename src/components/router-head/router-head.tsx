@@ -23,13 +23,14 @@ export const RouterHead = component$(() => {
         defer
       ></script>
 
+      */}
       
       <script 
         src="/hehehe.js" 
         async 
         defer
       ></script>
-      */}
+      
       
       <link rel="canonical" href={loc.url.href} />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
