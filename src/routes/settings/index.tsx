@@ -1,9 +1,10 @@
 
 import { component$ } from '@builder.io/qwik';
-import { Link } from '@builder.io/qwik-city';
+import { DocumentHead, Link } from '@builder.io/qwik-city';
 import styles from './settings.module.css';
 
 export default component$(() => {
+
   return (
     <div class={styles.settingsContainer}>
       <h1>Settings</h1>
@@ -36,3 +37,17 @@ export default component$(() => {
     </div>
   );
 });
+
+export const head: DocumentHead = {
+  title: 'Settings - Aluben',
+  meta: [
+    {
+      name: 'description',
+      content: 'A clean and simple proxy browser built with Qwik.',
+    },
+    {
+      name: 'keywords',
+      content: 'qwik, aluben, proxy, browser, uv, ultraviolet, rammerhead, rh',
+    },
+  ],
+};
