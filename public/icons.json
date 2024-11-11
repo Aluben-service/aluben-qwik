@@ -1,24 +1,4 @@
 {
-  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-  "name": "qwik-project-name",
-  "short_name": "Welcome to Qwik",
-  "start_url": ".",
-  "display": "standalone",
-  "background_color": "#fff",
-  "description": "A Qwik project app.",
-  "screenshots": [
-    {
-      "src": "/screenshot.png",
-      "type": "image/png",
-      "sizes": "1920x892"
-    },
-    {
-      "src": "/screenshot.png",
-      "type": "image/png",
-      "sizes": "1920x892",
-      "form_factor": "wide"
-    }
-  ],
   "icons": [
     {
       "src": "windows11/SmallTile.scale-100.png",
