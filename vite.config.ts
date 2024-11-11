@@ -5,11 +5,14 @@
 import { defineConfig, type UserConfig } from "vite";
 import { qwikVite } from "@builder.io/qwik/optimizer";
 import { qwikCity } from "@builder.io/qwik-city/vite";
-import { qwikPwa } from "@qwikdev/pwa";
 import { ChemicalVitePlugin } from "chemicaljs";
 import tsconfigPaths from "vite-tsconfig-paths";
 import pkg from "./package.json";
+import { type PWAOptions, qwikPwa } from "@qwikdev/pwa";
 
+const config: PWAOptions | undefined = process.env.CUSTOM_CONFIG === "true"
+ ? { config: true }
+    : undefined;
 type PkgDep = Record<string, string>;
 const { dependencies = {}, devDependencies = {} } = pkg as any as {
   dependencies: PkgDep;
@@ -27,9 +30,7 @@ export default defineConfig(({ command, mode }): UserConfig => {
       // (optional) enables debugging in workbox
       "process.env.NODE_ENV": JSON.stringify("development"),
     },
-    plugins: [qwikCity(), qwikVite(), tsconfigPaths(), qwikPwa({
-      /* options */
-    }), ChemicalVitePlugin({ default: 'uv', uv: true, rammerhead: false, experimental: { meteor: true, scramjet: true } })],
+    plugins: [qwikCity(), qwikVite(), tsconfigPaths(), qwikPwa(config), ChemicalVitePlugin({ default: 'uv', uv: true, rammerhead: false, experimental: { meteor: true, scramjet: true } })],
     // This tells Vite which dependencies to pre-build in dev mode.
     optimizeDeps: {
       // Put problematic deps that break bundling here, mostly those with binaries.
