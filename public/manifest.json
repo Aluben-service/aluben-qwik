@@ -1,11 +1,11 @@
 {
   "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-  "name": "qwik-project-name",
-  "short_name": "Welcome to Qwik",
-  "start_url": ".",
+  "name": "Aluben",
+  "short_name": "Aluben",
+  "start_url": "https://meowcatpls.netlify.app",
   "display": "standalone",
   "background_color": "#fff",
-  "description": "A Qwik project app.",
+  "description": "A clean and simply proxy made in Qwik.",
   "screenshots": [
     {
       "src": "/screenshot.png",
@@ -468,5 +468,8 @@
       "src": "ios/1024.png",
       "sizes": "1024x1024"
     }
-  ]
+  ],
+  "theme_color": "#000000",
+  "id": "v1",
+  "lang": "en"
 }
