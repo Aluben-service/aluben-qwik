@@ -5,5 +5,18 @@
   "start_url": ".",
   "display": "standalone",
   "background_color": "#fff",
-  "description": "A Qwik project app."
+  "description": "A Qwik project app.",
+  "screenshots": [
+    {
+      "src": "/screenshot.png",
+      "type": "image/png",
+      "sizes": "1920x892"
+    },
+    {
+      "src": "/screenshot.png",
+      "type": "image/png",
+      "sizes": "1920x892",
+      "form_factor": "wide"
+    }
+  ]
 }
