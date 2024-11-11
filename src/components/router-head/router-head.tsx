@@ -13,6 +13,7 @@ export const RouterHead = component$(() => {
     <>
       <title>{head.title}</title>
       
+      {/*
       <script src="/chemical.components.js" async defer></script>
       <script
         data-wisp-store
@@ -22,7 +23,7 @@ export const RouterHead = component$(() => {
         defer
       ></script>
 
-      {/*
+      
       <script 
         src="/hehehe.js" 
         async 
