@@ -52,6 +52,7 @@
     "tailwindcss": "^3.4.14",
     "typescript": "5.4.5",
     "vite": "5.3.6",
+    "@qwikdev/pwa": "^0.0.4",
     "vite-tsconfig-paths": "^4.3.2"
   },
   "dependencies": {
