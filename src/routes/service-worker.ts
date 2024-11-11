@@ -17,4 +17,4 @@ setupPwa();
 
 //addEventListener("activate", () => self.clients.claim());
 
-declare const self: ServiceWorkerGlobalScope;
+//declare const self: ServiceWorkerGlobalScope;
