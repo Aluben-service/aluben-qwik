@@ -58,7 +58,7 @@
   "dependencies": {
     "localforage": "^1.10.0",
     "sweetalert2": "^11.14.4",
-    "sharp": "0.32.6"
+    "sharp": "0.32.6",
     "wisp-server-node": "^1.1.7"
   }
 }
