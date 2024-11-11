@@ -20,7 +20,7 @@
   "trustedDependencies-annotation": "Needed for bun to allow running install scripts",
   "type": "module",
   "scripts": {
-    "build": "qwik build && bun run build.ts",
+    "build": "qwik build",
     "build.client": "vite build",
     "build.preview": "vite build --ssr src/entry.preview.tsx",
     "build.server": "vite build -c adapters/netlify-edge/vite.config.ts",
@@ -52,12 +52,13 @@
     "tailwindcss": "^3.4.14",
     "typescript": "5.4.5",
     "vite": "5.3.6",
+    "@qwikdev/pwa": "^0.0.4",
     "vite-tsconfig-paths": "^4.3.2"
   },
   "dependencies": {
     "localforage": "^1.10.0",
-    "mousetrap": "^1.6.5",
     "sweetalert2": "^11.14.4",
+    "sharp": "0.32.6",
     "wisp-server-node": "^1.1.7"
   }
 }

@@ -8,7 +8,11 @@ import { qwikCity } from "@builder.io/qwik-city/vite";
 import { ChemicalVitePlugin } from "chemicaljs";
 import tsconfigPaths from "vite-tsconfig-paths";
 import pkg from "./package.json";
+import { type PWAOptions, qwikPwa } from "@qwikdev/pwa";
 
+const config: PWAOptions | undefined = process.env.CUSTOM_CONFIG === "true"
+ ? { config: true }
+    : undefined;
 type PkgDep = Record<string, string>;
 const { dependencies = {}, devDependencies = {} } = pkg as any as {
   dependencies: PkgDep;
@@ -22,11 +26,14 @@ errorOnDuplicatesPkgDeps(devDependencies, dependencies);
  */
 export default defineConfig(({ command, mode }): UserConfig => {
   return {
-    plugins: [qwikCity(), qwikVite(), tsconfigPaths(), ChemicalVitePlugin({ default: 'uv', uv: true, rammerhead: true, experimental: { scramjet: true } })],
+    define: {
+      // (optional) enables debugging in workbox
+      "process.env.NODE_ENV": JSON.stringify("development"),
+    },
+    plugins: [qwikCity(), qwikVite(), tsconfigPaths(), qwikPwa(config), ChemicalVitePlugin({ default: 'uv', uv: true, rammerhead: false, experimental: { meteor: true, scramjet: true } })],
     // This tells Vite which dependencies to pre-build in dev mode.
     optimizeDeps: {
       // Put problematic deps that break bundling here, mostly those with binaries.
-      // For example ['better-sqlite3'] if you use that in server functions.
       exclude: [],
     },
 

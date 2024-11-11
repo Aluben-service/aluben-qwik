@@ -1,16 +1,10 @@
 
 import { component$ } from '@builder.io/qwik';
-import { Link } from '@builder.io/qwik-city';
+import { DocumentHead, Link } from '@builder.io/qwik-city';
 import styles from './settings.module.css';
-import { isBrowser } from '@builder.io/qwik/build';
-import Mousetrap from 'mousetrap';
 
 export default component$(() => {
-  if (isBrowser) {
-    Mousetrap.bind(["command+k", "ctrl+k"], function () {
-      alert("a");
-    });
-  }
+
   return (
     <div class={styles.settingsContainer}>
       <h1>Settings</h1>
@@ -43,3 +37,17 @@ export default component$(() => {
     </div>
   );
 });
+
+export const head: DocumentHead = {
+  title: 'Settings - Aluben',
+  meta: [
+    {
+      name: 'description',
+      content: 'A clean and simple proxy browser built with Qwik.',
+    },
+    {
+      name: 'keywords',
+      content: 'qwik, aluben, proxy, browser, uv, ultraviolet, rammerhead, rh',
+    },
+  ],
+};
