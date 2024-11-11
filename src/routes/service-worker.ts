@@ -13,6 +13,6 @@ setupServiceWorker();
 
 addEventListener("install", () => self.skipWaiting());
 
-addEventListener("activate", () => self.clients.claim());
+//addEventListener("activate", () => self.clients.claim());
 
 declare const self: ServiceWorkerGlobalScope;
