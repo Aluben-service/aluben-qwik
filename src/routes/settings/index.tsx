@@ -2,15 +2,8 @@
 import { component$ } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
 import styles from './settings.module.css';
-import { isBrowser } from '@builder.io/qwik/build';
-import Mousetrap from 'mousetrap';
 
 export default component$(() => {
-  if (isBrowser) {
-    Mousetrap.bind(["command+k", "ctrl+k"], function () {
-      alert("a");
-    });
-  }
   return (
     <div class={styles.settingsContainer}>
       <h1>Settings</h1>
