@@ -27,6 +27,7 @@ export default component$(() => {
             href={`${import.meta.env.BASE_URL}manifest.json`}
           />
         )}
+        <ServiceWorkerRegister />
         <RouterHead />
       </head>
       <body lang="en">
