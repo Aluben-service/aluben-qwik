@@ -1,4 +1,5 @@
 import { component$ } from '@builder.io/qwik';
+import { DocumentHead } from '@builder.io/qwik-city';
 import { AuthComponent } from '~/components/Auth';
 
 export default component$(() => {
@@ -9,3 +10,17 @@ export default component$(() => {
     </div>
   );
 });
+
+export const head: DocumentHead = {
+    title: 'Login - Aluben',
+    meta: [
+      {
+        name: 'description',
+        content: 'Aluben\'s useless login',
+      },
+      {
+        name: 'keywords',
+        content: 'qwik, aluben, proxy, browser, leaderboard, work in progress',
+      },
+    ],
+  };

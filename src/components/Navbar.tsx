@@ -2,6 +2,7 @@ import { component$ } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
 
 export const Navbar = component$(() => {
+  
   return (
     <nav class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-800 p-6 rounded-lg shadow-lg z-50">
       <div class="flex flex-col items-center space-y-4">
@@ -10,14 +11,14 @@ export const Navbar = component$(() => {
           <Link href="/" class="hover:text-gray-300 text-center">
             Home
           </Link>
-          <Link href="/leaderboard/" class="hover:text-gray-300 text-center">
-            Leaderboard(WIP)
-          </Link>
           <Link href="/settings/" class="hover:text-gray-300 text-center">
             Settings
           </Link>
+          <Link href="/leaderboard/" class="hover:text-gray-300 text-center">
+            Leaderboard(WIP)
+          </Link>
           <Link href="/login/" class="hover:text-gray-300 text-center">
-            Login
+            Login(WIP)
           </Link>
         </div>
       </div>
