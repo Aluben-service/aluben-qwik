@@ -127,4 +127,3 @@ export function PanelIcon(props: PropsOf<"svg">, key: string) {
     );
   }
 
-
