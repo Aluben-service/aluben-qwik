@@ -6,5 +6,5 @@ export default defineStackbitConfig({
     "ssgName": "custom",
     "contentSources": [],
     "postInstallCommand": "npm i --no-save @stackbit/types",
-    "devCommand": "bun run dev"
+    "devCommand": "npm run dev"
 })
