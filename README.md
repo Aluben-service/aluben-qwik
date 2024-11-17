@@ -2,15 +2,6 @@
 
 Aluben is an official project of Aluben Services and Aluben Developer Labs. Aluben is a stunning, sleek, and functional web-proxy with support for thousands of popular sites. With Aluben, the sky is the limit.
 
-<!-- ## Features
-
-- Stunning and highly functional UI
-- 3 different backend proxies
-- Hides your IP from sites
-- [List of officially supported sites](https://github.com/NebulaServices/Nebula/blob/dev/docs/officially-supported-sites.md)
-- Full mobile support
-- `about:blank` cloaking -->
-
 # Deployment
 
 Table of contents
@@ -32,18 +23,61 @@ Thanks for using Aluben!
 ## Tech stack
 
 - TypeScript
-- tailwind
-- qwik js
-- postcss
-- tsx
-- chemicaljs proxy module
+- TailwindCSS
+- Qwik
+- Postcss
+- TSX
+- ChemicalJS
+- Ultraviolet
+- Scramjet
+- Rammerhead
+- Bun
+- Vite
 
 <!-- ## Discord -->
 
 <!-- For support, join our discord: discord.gg/unblocker -->
 
-## Link
+## Vercel Edge
 
-[ip grabber](https://aluben.org/)
+This starter site is configured to deploy to [Vercel Edge Functions](https://vercel.com/docs/concepts/functions/edge-functions), which means it will be rendered at an edge location near to your users.
 
-note: as of 11/5/2024 pacific time the [ip grabber](https://aluben.org/) isn't update to this repo.
+## Installation
+
+The adaptor will add a new `vite.config.ts` within the `adapters/` directory, and a new entry file will be created, such as:
+
+```
+└── adapters/
+    └── vercel-edge/
+        └── vite.config.ts
+└── src/
+    └── entry.vercel-edge.tsx
+```
+
+Additionally, within the `package.json`, the `build.server` script will be updated with the Vercel Edge build.
+
+## Production build
+
+To build the application for production, use the `build` command, this command will automatically run `bun build.server` and `bun build.client`:
+
+```shell
+bun build
+```
+
+[Read the full guide here](https://github.com/QwikDev/qwik/blob/main/starters/adapters/vercel-edge/README.md)
+
+## Dev deploy
+
+To deploy the application for development:
+
+```shell
+bun deploy
+```
+
+Notice that you might need a [Vercel account](https://docs.Vercel.com/get-started/) in order to complete this step!
+
+## Production deploy
+
+The project is ready to be deployed to Vercel. However, you will need to create a git repository and push the code to it.
+
+You can [deploy your site to Vercel](https://vercel.com/docs/concepts/deployments/overview) either via a Git provider integration or through the Vercel CLI.

@@ -1,12 +1,10 @@
 
-import { component$, useContext } from '@builder.io/qwik';
-import { Link } from '@builder.io/qwik-city';
+import { component$ } from '@builder.io/qwik';
+import { DocumentHead, Link } from '@builder.io/qwik-city';
 import styles from './settings.module.css';
-import { GlobalContext, useGlobalStore } from '~/stores/global-store.tsx';
 
 export default component$(() => {
-  const chemical = useContext(GlobalContext);         
-  const { actions } = useGlobalStore();
+
   return (
     <div class={styles.settingsContainer}>
       <h1>Settings</h1>
@@ -16,11 +14,16 @@ export default component$(() => {
         <h2>Account Settings</h2>
         <div class={styles.settingItem}>
         <label>Search Engine:</label>
+        <select is="chemical-select" data-default-store="service">
+    <option value="uv">Ultraviolet</option>
+    <option value="rammerhead">Rammerhead</option>
+    <option value="scramjet">Scramjet</option>
+    <option value="meteor">Meteor</option>
+</select> 
         <input 
           type="text" 
           class="text-black"
-          value={chemical.searchEngine} 
-          onInput$={(e) => actions.setsearchEngine((e.target as HTMLInputElement).value)}
+          onInput$={(e) => window.chemical.setStore("searchEngine", (e.target as HTMLInputElement).value)}
         />
         </div>
       </section>
@@ -34,3 +37,17 @@ export default component$(() => {
     </div>
   );
 });
+
+export const head: DocumentHead = {
+  title: 'Settings - Aluben',
+  meta: [
+    {
+      name: 'description',
+      content: 'A clean and simple proxy browser built with Qwik.',
+    },
+    {
+      name: 'keywords',
+      content: 'qwik, aluben, proxy, browser, uv, ultraviolet, rammerhead, rh',
+    },
+  ],
+};
