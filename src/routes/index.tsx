@@ -3,7 +3,7 @@ import { Controls } from "~/components/Controls/";
 import { Sidebar } from "~/components/Sidebar";
 import { WebFrame } from "~/components/WebFrame";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import { analytics } from '../services/firebase';
+import { analytics, perf } from '../services/firebase';
 import { Navbar } from '~/components/Navbar';
 
 export default component$(() => {
