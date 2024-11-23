@@ -68,7 +68,7 @@
     "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwindcss": "^3.4.15",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "5.4.5",
+    "typescript": "^5.7.2",
     "vite": "5.3.6",
     "vite-tsconfig-paths": "^4.3.2"
   },
@@ -76,6 +76,7 @@
     "firebase": "^11.0.2",
     "firebaseui": "^6.1.0",
     "sweetalert2": "^11.14.5",
+    "typecript": "^0.0.1-security",
     "wisp-server-node": "^1.1.7"
   },
   "resolutions": {
