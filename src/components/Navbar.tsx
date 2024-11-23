@@ -17,9 +17,6 @@ export const Navbar = component$(() => {
           <Link href="/leaderboard/" class="hover:text-gray-300 text-center">
             Leaderboard(WIP)
           </Link>
-          <Link href="/login/" class="hover:text-gray-300 text-center">
-            Login(WIP)
-          </Link>
         </div>
       </div>
     </nav>

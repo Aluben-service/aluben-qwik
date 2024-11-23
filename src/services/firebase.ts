@@ -3,6 +3,8 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getPerformance } from "firebase/performance";
+import { getFirestore, collection, getDocs, query, orderBy } from 'firebase/firestore';
+
 
 const firebaseConfig = {
   apiKey: import.meta.env.PUBLIC_FIREBASE_API_KEY,
@@ -20,5 +22,6 @@ const app = initializeApp(firebaseConfig);
 export const analytics = typeof window !== 'undefined' ? getAnalytics(app) : null;
 export const perf = typeof window !== 'undefined' ? getPerformance(app) : null;
 export const auth = getAuth(app); // Initialize Firebase Auth
+export const db = getFirestore(app);
 
 export default app;

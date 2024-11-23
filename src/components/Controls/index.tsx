@@ -1,34 +1,52 @@
 import { component$ } from "@builder.io/qwik";
-import { isBrowser } from '@builder.io/qwik/build';
-import { 
-  ArrowBackIcon, 
-  ArrowForwardIcon, 
-  RefreshIcon, 
-  BookmarkIcon, 
-  CodeIcon, 
-  PanelIcon 
-} from "~/components/Icons";
-import { useControls } from './hooks';
-import { createEventHandlers } from './eventHandlers';
+import { isBrowser } from "@builder.io/qwik/build";
+import {
+  TbReload,
+  TbArrowLeft,
+  TbArrowRight,
+  TbStar,
+  TbCode,
+  TbLayoutSidebarRightExpandFilled,
+  TbLayoutSidebarRightCollapseFilled,
+} from "@qwikest/icons/tablericons";
+import { useControls } from "./hooks";
+import { createEventHandlers } from "./eventHandlers";
 
 export const Controls = component$<{ store: any }>(({ store }) => {
   const { isDevtoolsVisible } = useControls(store);
-  const { addBookmark, toggleDevtools } = createEventHandlers(store, isDevtoolsVisible);
+  const { addBookmark, toggleDevtools } = createEventHandlers(
+    store,
+    isDevtoolsVisible,
+  );
   let searchEngine;
-  if(isBrowser) {
+  if (isBrowser) {
     searchEngine = localStorage.getItem("@chemical/searchEngine");
   }
 
   return (
-    <section id="controls">
-      <button aria-label="Go forward" onClick$={() => window.chemicalAction("forward", "web")}>
-        <ArrowForwardIcon />
+    <section
+      id="controls"
+      class={
+        "fixed left-0 right-0 z-10 flex h-10 items-center justify-center gap-2 px-2"
+      }
+    >
+      <button
+        aria-label="Go forward"
+        onClick$={() => window.chemicalAction("forward", "web")}
+      >
+        <TbArrowLeft />
       </button>
-      <button aria-label="Go back" onClick$={() => window.chemicalAction("back", "web")}>
-        <ArrowBackIcon />
+      <button
+        aria-label="Go back"
+        onClick$={() => window.chemicalAction("back", "web")}
+      >
+        <TbArrowRight />
       </button>
-      <button aria-label="Reload" onClick$={() => window.chemicalAction("reload", "web")}>
-        <RefreshIcon />
+      <button
+        aria-label="Reload"
+        onClick$={() => window.chemicalAction("reload", "web")}
+      >
+        <TbReload />
       </button>
       <input
         autofocus
@@ -36,20 +54,35 @@ export const Controls = component$<{ store: any }>(({ store }) => {
         autocomplete="off"
         id="search"
         data-frame="web"
-        data-service-store	
+        data-service-store
         data-auto-https
-        {...(searchEngine ? { 'data-search-engine-store': true } : { 'data-search-engine': 'https://search.brave.com/search?q=%s' })}
+        {...(searchEngine
+          ? { "data-search-engine-store": true }
+          : { "data-search-engine": "https://search.brave.com/search?q=%s" })}
         placeholder="Search or Enter a URL"
         is="chemical-input"
+        class={
+          "font-inherit w-[42rem] max-w-[calc(100%-2rem)] animate-[fadeIn_1.5s_ease-in-out] rounded-2xl border-none bg-[#2f2f2f] px-2 py-1 text-inherit outline-none"
+        }
       />
-      <button aria-label="Add a bookmark for the current page" onClick$={addBookmark}>
-        <BookmarkIcon />
+      <button
+        aria-label="Add a bookmark for the current page"
+        onClick$={addBookmark}
+      >
+        <TbStar />
       </button>
       <button aria-label="Developer tools" onClick$={() => toggleDevtools()}>
-        <CodeIcon />
+        <TbCode />
       </button>
-      <button aria-label="Open sidebar" onClick$={() => store.sidebarVisible = !store.sidebarVisible}>
-        <PanelIcon />
+      <button
+        aria-label="Open sidebar"
+        onClick$={() => (store.sidebarVisible = !store.sidebarVisible)}
+      >
+        {store.sidebarVisible ? (
+          <TbLayoutSidebarRightCollapseFilled />
+        ) : (
+          <TbLayoutSidebarRightExpandFilled />
+        )}
       </button>
     </section>
   );

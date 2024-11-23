@@ -1,3 +1,5 @@
+importScripts("/workerware/workerware.js");
+
 const rammerheadEnabled = true;
 const scramjetEnabled = false;
 const uvEnabled = true;
@@ -20,6 +22,30 @@ if (navigator.userAgent.includes("Firefox")) {
 }
 
 let uv, scramjet;
+// Default options, these don't need to be provided on instantiation.
+const ww = new WorkerWare({
+  debug: false,
+  randomNames: false,
+  timing: false
+});
+ww.use({
+  // Required
+  function: async function(event) {
+    const url = new URL(event.request.url);
+    if (url.hostname.includes('ads') || url.hostname.includes('analytics') || url.hostname.includes('tracker')) {
+      return new Response('', {status: 404});
+    }
+    return fetch(event.request);
+  },
+  // Required, can take in multiple events!
+  events: ["fetch"],
+  // Optional, defaults to function.prototype.name, or is set to a random string if randomNames is set to true.
+  name: "Adblock",
+  // Optional configuration that can be accessed by the middleware under event.workerware.config
+  configuration: {
+    foo: "bar"
+  }
+});
 
 if (uvEnabled) {
   uv = new UVServiceWorker();

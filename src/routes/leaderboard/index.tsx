@@ -1,36 +1,45 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, useSignal, useTask$ } from "@builder.io/qwik";
 import { DocumentHead } from "@builder.io/qwik-city";
-import { InvisibleNav } from "~/components/InvisibleNav";
+import { query, collection, orderBy, getDocs } from "firebase/firestore";
+import { Protected } from "~/components/Protected";
+import { db } from "~/services/firebase";
 
 export default component$(() => {
+  const leaderboard = useSignal<{ game: string; score: number }[]>([]);
+
+  // Fetch leaderboard data
+  useTask$(async () => {
+    const q = query(collection(db, 'leaderboard'), orderBy('score', 'desc'));
+    const querySnapshot = await getDocs(q);
+    const scores: { game: string; score: number }[] = [];
+    querySnapshot.forEach((doc) => {
+      scores.push(doc.data() as { game: string; score: number });
+    });
+    leaderboard.value = scores;
+  });
+
   return (
     <>
-      <InvisibleNav />
-      <div class="min-h-screen flex items-center justify-center bg-gray-900">
-        <div class="text-center">
-          <div class="mb-8">
-            <div class="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-blue-500 mx-auto"></div>
-          </div>
-          <h1 class="text-6xl font-bold text-white mb-4">Work in Progress</h1>
-          <p class="text-xl text-gray-400 mb-8">
-            The leaderboard feature is currently under development. Check back soon!
-          </p>
-          <div class="flex justify-center space-x-4">
-            <a
-              href="/"
-              class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Return Home
-            </a>
-            <a
-              href="https://github.com/Aluben-Services/aluben-qwik"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="px-6 py-3 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
-            >
-              View on GitHub
-            </a>
-          </div>
+        
+            <div class="min-h-screen bg-gray-900 py-12 px-4">
+      <h1 class="text-4xl font-bold text-white text-center mb-8">Game Leaderboard</h1>
+      <div class="max-w-4xl mx-auto">
+        <table class="w-full bg-gray-800 rounded-lg overflow-hidden">
+          <thead>
+            <tr class="bg-gray-700">
+              <th class="px-6 py-4 text-left text-white font-semibold">Game</th>
+              <th class="px-6 py-4 text-left text-white font-semibold">Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {leaderboard.value.map((entry, index) => (
+              <tr key={index} class="border-t border-gray-700 hover:bg-gray-700 transition-colors">
+                <td class="px-6 py-4 text-gray-300">{entry.game}</td>
+                <td class="px-6 py-4 text-gray-300">{entry.score}</td>
+              </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </>
@@ -38,11 +47,11 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: 'Leaderboard (WIP) - Aluben',
+  title: 'Leaderboard - Aluben',
   meta: [
     {
       name: 'description',
-      content: 'Leaderboard feature coming soon to Aluben proxy browser.',
+      content: 'Leaderboard for Aluben proxy browser.',
     },
     {
       name: 'keywords',

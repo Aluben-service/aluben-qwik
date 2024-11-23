@@ -1,9 +1,10 @@
+
 import { component$, useStore, $ } from '@builder.io/qwik';
 import { login, signUp, logout } from '~/services/auth';
 import { auth } from '~/services/firebase'; // Import Firebase auth instance
 import { GoogleAuthProvider, GithubAuthProvider, signInWithPopup } from 'firebase/auth';
 
-export const AuthComponent = component$(() => {
+export const Auth = component$(() => {
   const state = useStore({ email: '', password: '', user: null });
 
   const handleSignUp = $(async () => {
