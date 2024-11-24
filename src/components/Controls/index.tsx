@@ -59,7 +59,7 @@ export const Controls = component$<{ store: any }>(({ store }) => {
           : { "data-search-engine": "https://search.brave.com/search?q=%s" })}
         placeholder="Search or Enter a URL"
         is="chemical-input"
-        class="font-inherit w-[clamp(200px,50vw,42rem)] max-w-[calc(100%-var(--spacing-fluid-xl))] animate-[fadeIn_1.5s_ease-in-out] rounded-2xl border-none bg-[#2f2f2f] px-[var(--spacing-fluid-sm)] py-[calc(var(--spacing-fluid-sm)/2)] text-inherit outline-none"
+        class="font-inherit w-[clamp(200px,50vw,42rem)] max-w-[calc(100%-var(--spacing-fluid-xl))] animate-[fadeIn_1.5s_ease-in-out] rounded-2xl border-none bg-[#2f2f2f] px-[var(--spacing-fluid-sm)] py-[calc(var(--spacing-fluid-sm)/4)] text-inherit outline-none"
       />
       <button
         aria-label="Add a bookmark for the current page"
