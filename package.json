@@ -79,7 +79,6 @@
     "@radix-ui/react-tooltip": "^1.1.4",
     "class-variance-authority": "^0.7.0",
     "localforage": "^1.10.0",
-    "sweetalert2": "^11.14.4",
     "firebase": "^11.0.2",
     "firebaseui": "^6.1.0",
     "lucide-react": "^0.460.0",
