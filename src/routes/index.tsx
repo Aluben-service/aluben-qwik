@@ -37,7 +37,6 @@ export default component$(() => {
     sidebarVisible: false,
   });
 
-    </div>
 
   // Add keyboard event listener
   useVisibleTask$(() => {
