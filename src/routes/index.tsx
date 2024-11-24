@@ -1,4 +1,3 @@
-
 import { component$, useStore, useVisibleTask$ } from "@builder.io/qwik";
 import { Controls } from "~/components/Controls/";
 import { Sidebar } from "~/components/Sidebar";
@@ -6,14 +5,39 @@ import { WebFrame } from "~/components/WebFrame";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { analytics } from "../services/firebase";
 
+interface Store {
+  web: string | null;
+  bookmarks: string[];
+  newBookmark: string;
+  sidebarVisible: boolean;
+}
+
+const useSidebarShortcut = (store: Store) => {
+  useVisibleTask$(({ cleanup }) => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "b") {
+        event.preventDefault();
+        store.sidebarVisible = !store.sidebarVisible;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    cleanup(() => {
+      window.removeEventListener("keydown", handleKeyDown);
+    });
+  });
+};
+
 export default component$(() => {
-  const store = useStore({
+  const store = useStore<Store>({
     web: null,
     bookmarks: [],
     newBookmark: "",
     sidebarVisible: false,
   });
 
+    </div>
 
   // Add keyboard event listener
   useVisibleTask$(() => {
@@ -30,7 +54,7 @@ export default component$(() => {
         <WebFrame store={store} />
       </main>
       <footer class={"mt-auto p-4 text-xs text-[aliceblue]"}>
-        &copy; 2024 Aluben Services, Inc.
+        &copy; {new Date().getFullYear()} Aluben Services, Inc.
       </footer>
           </>
   );
