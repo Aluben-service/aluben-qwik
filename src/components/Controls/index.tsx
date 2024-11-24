@@ -1,33 +1,45 @@
 import { component$ } from "@builder.io/qwik";
-import { isBrowser } from '@builder.io/qwik/build';
-import { 
-  ArrowBackIcon, 
-  ArrowForwardIcon, 
-  RefreshIcon, 
-  BookmarkIcon, 
-  CodeIcon, 
-  PanelIcon 
+import { isBrowser } from "@builder.io/qwik/build";
+import {
+  ArrowBackIcon,
+  ArrowForwardIcon,
+  RefreshIcon,
+  BookmarkIcon,
+  CodeIcon,
+  PanelIcon,
 } from "~/components/Icons";
-import { useControls } from './hooks';
-import { createEventHandlers } from './eventHandlers';
+import { useControls } from "./hooks";
+import { createEventHandlers } from "./eventHandlers";
 
 export const Controls = component$<{ store: any }>(({ store }) => {
   const { isDevtoolsVisible } = useControls(store);
-  const { addBookmark, toggleDevtools } = createEventHandlers(store, isDevtoolsVisible);
+  const { addBookmark, toggleDevtools } = createEventHandlers(
+    store,
+    isDevtoolsVisible,
+  );
   let searchEngine;
-  if(isBrowser) {
+  if (isBrowser) {
     searchEngine = localStorage.getItem("@chemical/searchEngine");
   }
 
   return (
     <section id="controls">
-      <button aria-label="Go forward" onClick$={() => window.chemicalAction("forward", "web")}>
+      <button
+        aria-label="Go forward"
+        onClick$={() => window.chemicalAction("forward", "web")}
+      >
         <ArrowForwardIcon />
       </button>
-      <button aria-label="Go back" onClick$={() => window.chemicalAction("back", "web")}>
+      <button
+        aria-label="Go back"
+        onClick$={() => window.chemicalAction("back", "web")}
+      >
         <ArrowBackIcon />
       </button>
-      <button aria-label="Reload" onClick$={() => window.chemicalAction("reload", "web")}>
+      <button
+        aria-label="Reload"
+        onClick$={() => window.chemicalAction("reload", "web")}
+      >
         <RefreshIcon />
       </button>
       <input
@@ -36,19 +48,27 @@ export const Controls = component$<{ store: any }>(({ store }) => {
         autocomplete="off"
         id="search"
         data-frame="web"
-        data-service-store	
+        data-service-store
         data-auto-https
-        {...(searchEngine ? { 'data-search-engine-store': true } : { 'data-search-engine': 'https://search.brave.com/search?q=%s' })}
+        {...(searchEngine
+          ? { "data-search-engine-store": true }
+          : { "data-search-engine": "https://search.brave.com/search?q=%s" })}
         placeholder="Search or Enter a URL"
         is="chemical-input"
       />
-      <button aria-label="Add a bookmark for the current page" onClick$={addBookmark}>
+      <button
+        aria-label="Add a bookmark for the current page"
+        onClick$={addBookmark}
+      >
         <BookmarkIcon />
       </button>
       <button aria-label="Developer tools" onClick$={() => toggleDevtools()}>
         <CodeIcon />
       </button>
-      <button aria-label="Open sidebar" onClick$={() => store.sidebarVisible = !store.sidebarVisible}>
+      <button
+        aria-label="Open sidebar"
+        onClick$={() => (store.sidebarVisible = !store.sidebarVisible)}
+      >
         <PanelIcon />
       </button>
     </section>
