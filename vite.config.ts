@@ -1,3 +1,4 @@
+
 /**
  * This is the base config for vite.
  * When building, the adapter config is used which loads this file and extends it.
@@ -27,15 +28,24 @@ export default defineConfig(({ command, mode }): UserConfig => {
       // (optional) enables debugging in workbox
       "process.env.NODE_ENV": JSON.stringify("development"),
     },
-    plugins: [qwikCity(), qwikVite(), tsconfigPaths(), qwikPwa({
-      /* options */
-    }), ChemicalVitePlugin({ default: 'uv', uv: true, rammerhead: false, experimental: { meteor: true, scramjet: true } })],
+    plugins: [
+      qwikCity(), qwikVite(), tsconfigPaths(), qwikPwa({
+        /* options */
+      }), ChemicalVitePlugin({
+        default: 'uv',
+        uv: true,
+        rammerhead: false,
+        experimental: {
+          meteor: true,
+          scramjet: true
+        }
+      })
+    ],
     // This tells Vite which dependencies to pre-build in dev mode.
     optimizeDeps: {
       // Put problematic deps that break bundling here, mostly those with binaries.
       exclude: [],
     },
-
     /**
      * This is an advanced setting. It improves the bundling of your server code. To use it, make sure you understand when your consumed packages are dependencies or dev dependencies. (otherwise things will break in production)
      */

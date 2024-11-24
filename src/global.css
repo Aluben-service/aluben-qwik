@@ -1,11 +1,72 @@
-/**
- * Tailwind CSS imports
- * View the full documentation at https://tailwindcss.com
- */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
 ::-webkit-scrollbar {
     width: 20px;
 }
@@ -25,15 +86,12 @@
 html,
 body {
     height: 100%;
-    /* Ensure full height */
 }
 
 body {
     margin: 0;
     display: flex;
-    /* Added for flex layout */
     flex-direction: column;
-    /* Stack children vertically */
     background: #212121;
     color: white;
     font-family: "Lexend", system-ui, -apple-system, sans-serif;
@@ -71,130 +129,22 @@ body {
     }
 }
 
-#search {
-    background: #2f2f2f;
-    font-size: inherit;
-    color: inherit;
-    font-family: inherit;
-    border: none;
-    outline: none;
-    padding: 0.25rem 0.5rem;
-    border-radius: 16px;
-    width: 42rem;
-    max-width: calc(100% - 2rem);
-    animation: fadeIn 1.5s ease-in-out;
-}
-
-#controls {
-    position: fixed;
-    /* Keep controls fixed at the top */
-    right: 0;
-    left: 0;
-    height: 2.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 0.5rem;
-    gap: 0.5rem;
-    z-index: 100;
-    /* Ensure it stays above other content */
-}
-
 #controls button {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: inherit;
-    font-family: inherit;
-    font-size: inherit;
-    cursor: pointer;
-    user-select: none;
-    border-radius: 6px;
-    padding: 0.25rem 0.5rem;
-    transition: transform 0.2s, background-color 0.2s;
+    @apply bg-white/20 border-none cursor-pointer select-none rounded-md py-1 px-2 transition-all duration-200;
 }
 
 #controls button:hover {
-    animation: buttonHover 0.2s forwards;
-}
-
-#web,
-.web-frame {
-    position: fixed;
-    top: 2.5rem;
-    /* Space for the controls */
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: calc(100% - 5.0rem);
-    border: none;
-    background: #212121;
-    user-select: none;
-    flex-grow: 1;
-    transition: width 0.3s ease;
-}
-
-.sidebar {
-    position: fixed;
-    top: 2.5rem;
-    right: 0;
-    width: 250px;
-    background: #212121;
-    border-left: 1px solid #ccc;
-    padding: 10px;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-    height: calc(100% - 2.5rem);
-    /* Adjust height to account for controls */
-    overflow-y: auto;
-    animation: slideInSidebar 0.5s ease forwards;
+    @apply animate-[buttonHover_0.2s_forwards];
 }
 
 .bookmark {
-    background: none !important;
-    border: none;
-    padding: 0 !important;
-    color: white;
-    cursor: pointer;
-    text-decoration: underline;
-    transition: color 0.2s;
+    @apply bg-transparent border-none p-0 text-white cursor-pointer underline transition-colors duration-200;
 }
 
 .bookmark:hover {
-    color: #b3b3b3;
-}
-
-.close {
-    flex-grow: 0;
-    flex-shrink: 0;
-    position: relative;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path stroke='rgba(0, 0, 0, .65)' stroke-linecap='square' stroke-width='1.5' d='M0 0 L8 8 M8 0 L0 8'></path></svg>");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 8px 8px;
-}
-
-#container {
-    display: flex;
-    /* Ensure container uses flex */
-    flex: 1;
-    /* Allow it to grow */
-    margin-top: 2.5rem;
-    /* Push down by the height of the controls */
+    @apply text-neutral-400;
 }
 
 .web-frame.sidebar-visible {
-    width: calc(100% - 250px) !important;
-    /* Adjust width when the sidebar is visible */
-}
-
-footer {
-    color: aliceblue;
-    padding: 1rem;
-    /* Footer padding */
-    margin-top: auto;
-    /* Push footer to the bottom */
-    font-size: 12px;
+    @apply w-[calc(100%-250px)] !important;
 }

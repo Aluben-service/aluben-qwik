@@ -1,8 +1,9 @@
-import { component$, useStore, $, useVisibleTask$ } from "@builder.io/qwik";
-import { Controls } from "~/components/Controls";
+import { component$, useStore, useVisibleTask$ } from "@builder.io/qwik";
+import { Controls } from "~/components/Controls/";
 import { Sidebar } from "~/components/Sidebar";
 import { WebFrame } from "~/components/WebFrame";
 import type { DocumentHead } from "@builder.io/qwik-city";
+import { analytics } from "../services/firebase";
 
 interface Store {
   web: string | null;
@@ -36,21 +37,27 @@ export default component$(() => {
     sidebarVisible: false,
   });
 
-  useSidebarShortcut(store);
+    </div>
+
+  // Add keyboard event listener
+  useVisibleTask$(() => {
+    if (analytics) {
+      console.log("Firebase Analytics initialized");
+    }
+  });
 
   return (
-    <div class="flex min-h-screen flex-col">
+    <>
+    <body></body>
       <Controls store={store} />
-      <main id="container" class="flex-1">
-        <div class="flex h-full">
-          {store.sidebarVisible && <Sidebar store={store} />}
-          <WebFrame store={store} />
-        </div>
+      <main class={"flex flex-1 mt-10"} id="container">
+        {store.sidebarVisible && <Sidebar store={store} />}
+        <WebFrame store={store} />
       </main>
-      <footer class="p-4 text-center text-sm text-gray-600">
+      <footer class={"mt-auto p-4 text-xs text-[aliceblue]"}>
         &copy; {new Date().getFullYear()} Aluben Services, Inc.
       </footer>
-    </div>
+          </>
   );
 });
 

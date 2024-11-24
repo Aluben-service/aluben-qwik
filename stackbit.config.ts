@@ -8,3 +8,4 @@ export default defineStackbitConfig({
     "postInstallCommand": "npm i --no-save @stackbit/types",
     "devCommand": "npm run dev"
 })
+
