@@ -1,4 +1,4 @@
-/*
+/**
  * WHAT IS THIS FILE?
  *
  * SSR entry point, in all cases the application is rendered outside the browser, this
@@ -21,7 +21,6 @@ export default function (opts: RenderToStreamOptions) {
   return renderToStream(<Root />, {
     manifest,
     ...opts,
-    containerTagName: 'html', // Ensure this is set to 'html'
     // Use container attributes to set attributes on the html tag.
     containerAttributes: {
       lang: "en-us",

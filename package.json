@@ -73,9 +73,16 @@
     "vite-tsconfig-paths": "^4.3.2"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.2",
+    "@radix-ui/react-separator": "^1.1.0",
+    "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-tooltip": "^1.1.4",
+    "class-variance-authority": "^0.7.0",
     "firebase": "^11.0.2",
     "firebaseui": "^6.1.0",
+    "lucide-react": "^0.460.0",
     "sweetalert2": "^11.14.5",
+    "tailwind-merge": "^2.5.4",
     "typecript": "^0.0.1-security",
     "wisp-server-node": "^1.1.7"
   },

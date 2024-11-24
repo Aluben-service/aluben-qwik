@@ -20,26 +20,27 @@ export default component$(() => {
 
   return (
     <>
-        
-            <div class="min-h-screen bg-gray-900 py-12 px-4">
-      <h1 class="text-4xl font-bold text-white text-center mb-8">Game Leaderboard</h1>
-      <div class="max-w-4xl mx-auto">
-        <table class="w-full bg-gray-800 rounded-lg overflow-hidden">
-          <thead>
-            <tr class="bg-gray-700">
-              <th class="px-6 py-4 text-left text-white font-semibold">Game</th>
-              <th class="px-6 py-4 text-left text-white font-semibold">Score</th>
-            </tr>
-          </thead>
-          <tbody>
-            {leaderboard.value.map((entry, index) => (
-              <tr key={index} class="border-t border-gray-700 hover:bg-gray-700 transition-colors">
-                <td class="px-6 py-4 text-gray-300">{entry.game}</td>
-                <td class="px-6 py-4 text-gray-300">{entry.score}</td>
-              </tr>
-              ))}
-            </tbody>
-          </table>
+      <div class="min-h-screen bg-gray-900 p-4 sm:p-6 lg:p-8">
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center mb-6 sm:mb-8 lg:mb-10">Game Leaderboard</h1>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="overflow-x-auto">
+            <table class="w-full bg-gray-800 rounded-lg overflow-hidden">
+              <thead>
+                <tr class="bg-gray-700">
+                  <th class="whitespace-nowrap py-3 px-4 sm:px-6 text-left text-sm sm:text-base text-white font-semibold">Game</th>
+                  <th class="whitespace-nowrap py-3 px-4 sm:px-6 text-left text-sm sm:text-base text-white font-semibold">Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                {leaderboard.value.map((entry, index) => (
+                  <tr key={index} class="border-t border-gray-700 hover:bg-gray-700 transition-colors">
+                    <td class="py-3 px-4 sm:px-6 text-sm sm:text-base text-gray-300">{entry.game}</td>
+                    <td class="py-3 px-4 sm:px-6 text-sm sm:text-base text-gray-300">{entry.score}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </>

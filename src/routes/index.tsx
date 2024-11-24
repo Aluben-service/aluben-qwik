@@ -24,7 +24,6 @@ export default component$(() => {
 
   return (
     <>
-    <body></body>
       <Controls store={store} />
       <main class={"flex flex-1 mt-10"} id="container">
         {store.sidebarVisible && <Sidebar store={store} />}

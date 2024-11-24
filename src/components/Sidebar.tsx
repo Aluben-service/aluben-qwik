@@ -8,9 +8,7 @@ export const Sidebar = component$<{ store: any }>(({ store }) => {
 
   return (
     <aside
-      class={
-        "sidebar fixed right-0 top-10 h-[calc(100%-2.5rem)] w-[250px] animate-[slideInSidebar_0.5s_ease_forwards] overflow-y-auto border-l border-[#ccc] bg-[#212121] p-2.5 shadow-[-2px_0_5px_rgba(0,0,0,0.1)]"
-      }
+      class="sidebar fixed right-0 top-[var(--spacing-fluid-xl)] h-[calc(100%-var(--spacing-fluid-xl))] w-[var(--sidebar-width)] animate-[slideInSidebar_0.5s_ease_forwards] overflow-y-auto border-l border-[#ccc] bg-[#212121] p-[var(--spacing-fluid-sm)] shadow-[-2px_0_5px_rgba(0,0,0,0.1)]"
     >
       <h2>Bookmarks</h2>
       <ul>
