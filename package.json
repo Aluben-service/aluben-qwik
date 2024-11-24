@@ -74,7 +74,6 @@
   },
   "dependencies": {
     "localforage": "^1.10.0",
-    "sweetalert2": "^11.14.4",
     "firebase": "^11.0.2",
     "firebaseui": "^6.1.0",
     "sweetalert2": "^11.14.5",
