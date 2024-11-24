@@ -11,21 +11,17 @@ interface Store {
   sidebarVisible: boolean;
 }
 
-// Custom hook with proper typing
 const useSidebarShortcut = (store: Store) => {
-  // Handler for keydown events needs to be inside useVisibleTask$
   useVisibleTask$(({ cleanup }) => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      // Check for Ctrl+B or Cmd+B (for Mac)
       if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "b") {
-        event.preventDefault(); // Prevent default browser behavior
+        event.preventDefault();
         store.sidebarVisible = !store.sidebarVisible;
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
 
-    // Clean up event listener when component unmounts
     cleanup(() => {
       window.removeEventListener("keydown", handleKeyDown);
     });

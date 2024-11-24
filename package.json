@@ -40,6 +40,7 @@
     "@builder.io/qwik": "^1.9.1",
     "@builder.io/qwik-city": "^1.9.1",
     "@netlify/edge-functions": "^2.0.0",
+    "@playwright/test": "^1.49.0",
     "@qwikdev/pwa": "^0.0.4",
     "@types/eslint": "8.56.10",
     "@types/node": "20.14.11",
@@ -57,9 +58,9 @@
     "vite-tsconfig-paths": "^4.3.2"
   },
   "dependencies": {
+    "@vite-pwa/assets-generator": "^0.2.6",
     "localforage": "^1.10.0",
     "sweetalert2": "^11.14.4",
-    "@vite-pwa/assets-generator": "^0.2.6",
     "wisp-server-node": "^1.1.7"
   },
   "resolutions": {
