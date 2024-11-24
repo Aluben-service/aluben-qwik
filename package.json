@@ -48,11 +48,11 @@
     "test:e2e": "playwright test"
   },
   "devDependencies": {
+    "@playwright/test": "^1.49.0",
     "@builder.io/qwik": "^1.10.0",
     "@builder.io/qwik-city": "^1.10.0",
     "@catppuccin/tailwindcss": "^0.1.6",
     "@netlify/edge-functions": "^2.11.0",
-    "@playwright/test": "^1.48.2",
     "@qwikdev/pwa": "^0.0.4",
     "@qwikest/icons": "^0.0.13",
     "@types/eslint": "8.56.10",
@@ -73,10 +73,11 @@
     "vite-tsconfig-paths": "^4.3.2"
   },
   "dependencies": {
+    "localforage": "^1.10.0",
+    "sweetalert2": "^11.14.4",
     "firebase": "^11.0.2",
     "firebaseui": "^6.1.0",
     "sweetalert2": "^11.14.5",
-    "typecript": "^0.0.1-security",
     "wisp-server-node": "^1.1.7"
   },
   "resolutions": {
