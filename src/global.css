@@ -94,106 +94,108 @@
 }
 
 ::-webkit-scrollbar {
-    width: clamp(12px, 2vw, 20px);
+  width: clamp(12px, 2vw, 20px);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: slateblue;
-    border-radius: 10px;
+  background: slateblue;
+  border-radius: 10px;
 }
 
 @font-face {
-    font-family: 'Lexend';
-    src: url("/Lexend.ttf");
-    font-display: swap;
+  font-family: 'Lexend';
+  src: url("/Lexend.ttf");
+  font-display: swap;
 }
 
 html,
 body {
-    height: 100%;
-    width: 100%;
-    max-width: 100vw;
-    overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 body {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    background: #212121;
-    color: white;
-    font-family: "Lexend", system-ui, -apple-system, sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-size: var(--font-size-base);
-    line-height: 1.5;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background: #212121;
+  color: white;
+  font-family: "Lexend", system-ui, -apple-system, sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: var(--font-size-base);
+  line-height: 1.5;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 @keyframes buttonHover {
-    0% {
-        transform: scale(1);
-        background-color: rgba(255, 255, 255, 0.2);
-    }
+  0% {
+    transform: scale(1);
+    background-color: rgba(255, 255, 255, 0.2);
+  }
 
-    100% {
-        transform: scale(1.05);
-        background-color: rgba(255, 255, 255, 0.4);
-    }
+  100% {
+    transform: scale(1.05);
+    background-color: rgba(255, 255, 255, 0.4);
+  }
 }
 
 @keyframes slideInSidebar {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
 
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-#controls button {
+#controls {
+  button {
     @apply bg-white/20 border-none cursor-pointer select-none rounded-md transition-all duration-200;
-/*    padding: clamp(0.15rem, 0.75vw, 0.35rem) clamp(0.35rem, 1.5vw, 0.75rem); */
-padding: clamp(0.1rem, 0.5vw, 0.25rem) clamp(0.25rem, 1vw, 0.5rem);
-    
+    padding: clamp(0.1rem, 0.5vw, 0.25rem) clamp(0.25rem, 1vw, 0.5rem);
     min-width: var(--spacing-fluid-sm);
     min-height: var(--spacing-fluid-sm);
-}
 
-#controls button:hover {
-    @apply animate-[buttonHover_0.2s_forwards];
+    &:hover {
+      @apply animate-[buttonHover_0.2s_forwards];
+    }
+  }
 }
 
 .bookmark {
-    @apply bg-transparent border-none p-0 text-white cursor-pointer underline transition-colors duration-200;
-    font-size: clamp(14px, 1vw + 0.5rem, 18px);
-}
+  @apply bg-transparent border-none p-0 text-white cursor-pointer underline transition-colors duration-200;
+  font-size: clamp(14px, 1vw + 0.5rem, 18px);
 
-.bookmark:hover {
+  &:hover {
     @apply text-neutral-400;
+  }
 }
 
-.web-frame.sidebar-visible {
+.web-frame {
+  &.sidebar-visible {
     @apply w-[calc(100%-min(250px,25vw))] !important;
     transition: width 0.3s ease;
+  }
 }
 
 h1 {
-    font-size: var(--font-size-xl);
-    margin-bottom: var(--spacing-fluid-md);
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-fluid-md);
 }
 
 h2 {
-    font-size: var(--font-size-lg);
-    margin-bottom: var(--spacing-fluid-sm);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-fluid-sm);
 }

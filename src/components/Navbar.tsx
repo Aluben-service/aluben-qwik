@@ -14,9 +14,11 @@ export const Navbar = component$(() => {
           <Link href="/settings/" class="hover:text-gray-300 text-center">
             Settings
           </Link>
+          {/*
           <Link href="/leaderboard/" class="hover:text-gray-300 text-center">
             Leaderboard(WIP)
           </Link>
+          */}
         </div>
       </div>
     </nav>

@@ -1,48 +1,95 @@
+:root {
+    --settings-max-width: 800px;
+    --settings-padding: 2rem;
+    --settings-section-bg: #2a2a2a;
+    --settings-section-border: #4a4a4a;
+    --settings-input-bg: #3a3a3a;
+    --settings-text: #ffffff;
+    --settings-text-secondary: #cccccc;
+    --settings-primary: #2196F3;
+    --settings-primary-dark: #1976D2;
+    --settings-shadow: rgba(255, 255, 255, 0.2);
+    --settings-primary-shadow: rgba(33, 150, 243, 0.2);
+    --settings-toggle-size: 26px;
+    --settings-toggle-knob: 20px;
+}
+
 .settingsContainer {
-    max-width: 800px;
+    max-width: var(--settings-max-width);
     margin: 0 auto;
-    padding: 2rem;
+    padding: var(--settings-padding);
 }
 
 .settingSection {
     margin-bottom: 2rem;
     padding: 1.5rem;
-    background-color: #ffffff;
+    background-color: var(--settings-section-bg);
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+    box-shadow: 0 4px 6px var(--settings-shadow);
+    transition: transform 0.2s ease;
 
-.settingSection h2 {
-    margin-bottom: 1.5rem;
-    color: #333;
-    font-size: 1.5rem;
+    &:hover {
+        transform: translateY(-2px);
+    }
+
+    h2 {
+        margin-bottom: 1.5rem;
+        color: var(--settings-text);
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
 }
 
 .settingItem {
-    margin-bottom: 1rem;
-}
+    margin-bottom: 1.5rem;
+    transition: opacity 0.2s ease;
 
-.settingItem label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
+    &:hover {
+        opacity: 0.9;
+    }
 
-.settingItem span {
-    font-weight: 500;
-    color: #4a4a4a;
-}
+    label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--settings-text);
+        width: 100%;
+        font-weight: 500;
+    }
 
-.settingItem input[type="text"],
-.settingItem input[type="email"],
-.settingItem select {
-    width: 60%;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-    width: auto;
+    select {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--settings-text);
+        width: 100%;
+        background-color: var(--settings-input-bg);
+        border: 1px solid var(--settings-section-border);
+    }
+
+    span {
+        font-weight: 500;
+        color: var(--settings-text-secondary);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select {
+        width: 60%;
+        padding: 0.75rem;
+        border: 1px solid var(--settings-section-border);
+        border-radius: 6px;
+        font-size: 1rem;
+        background-color: var(--settings-input-bg);
+        color: var(--settings-text);
+        transition: all 0.2s ease;
+
+        &:focus {
+            outline: none;
+            border-color: var(--settings-primary);
+            box-shadow: 0 0 0 2px var(--settings-primary-shadow);
+        }
+    }
 }
 
 .toggle {
@@ -51,41 +98,41 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-}
 
-.toggle input[type="checkbox"] {
-    opacity: 0;
-    width: 0;
-    height: 0;
+    input[type="checkbox"] {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
 }
 
 .slider {
     position: relative;
-    width: 50px;
-    height: 26px;
-    background-color: #ccc;
-    border-radius: 26px;
+    width: calc(var(--settings-toggle-size) * 1.92);
+    height: var(--settings-toggle-size);
+    background-color: var(--settings-input-bg);
+    border-radius: var(--settings-toggle-size);
     transition: 0.3s;
+
+    &:before {
+        position: absolute;
+        content: "";
+        height: var(--settings-toggle-knob);
+        width: var(--settings-toggle-knob);
+        left: 3px;
+        bottom: 3px;
+        background-color: var(--settings-text);
+        border-radius: 50%;
+        transition: 0.3s;
+    }
 }
 
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 20px;
-    width: 20px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    border-radius: 50%;
-    transition: 0.3s;
-}
+.toggle input:checked + .slider {
+    background-color: var(--settings-primary);
 
-.toggle input:checked+.slider {
-    background-color: #2196F3;
-}
-
-.toggle input:checked+.slider:before {
-    transform: translateX(24px);
+    &:before {
+        transform: translateX(24px);
+    }
 }
 
 .actions {
@@ -96,39 +143,47 @@
 
 .saveButton {
     padding: 0.75rem 1.5rem;
-    background-color: #2196F3;
-    color: white;
+    background-color: var(--settings-primary);
+    color: var(--settings-text);
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 1rem;
-    transition: background-color 0.3s;
-}
+    font-weight: 500;
+    transition: all 0.2s ease;
 
-.saveButton:hover {
-    background-color: #1976D2;
+    &:hover {
+        background-color: var(--settings-primary-dark);
+        transform: translateY(-1px);
+    }
 }
 
 .cancelButton {
     padding: 0.75rem 1.5rem;
-    background-color: #f5f5f5;
-    color: #4a4a4a;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    background-color: var(--settings-input-bg);
+    color: var(--settings-text);
+    border: 1px solid var(--settings-section-border);
+    border-radius: 6px;
     text-decoration: none;
     font-size: 1rem;
-    transition: background-color 0.3s;
-}
+    font-weight: 500;
+    transition: all 0.2s ease;
 
-.cancelButton:hover {
-    background-color: #e0e0e0;
+    &:hover {
+        background-color: var(--settings-section-border);
+        transform: translateY(-1px);
+    }
 }
 
 .settingsGrid {
-    max-width: 800px;
-    grid-template-rows: auto; /* rows automatically sized */
-    grid-template-columns: repeat(20px, minmax(200px, 1fr));
-    margin: 0 auto;
-    padding: 2rem;
     display: grid;
+    max-width: var(--settings-max-width);
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin: 0 auto;
+    padding: 1rem;
+
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
 }

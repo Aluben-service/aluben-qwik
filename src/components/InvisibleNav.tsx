@@ -12,7 +12,7 @@ export const InvisibleNav = component$(() => {
         const isAltPressed = e.ctrlKey || e.key.toLowerCase().includes('ctrl');
         
         // Check if 'a' key is pressed (case insensitive)
-        const isPressed = e.key.toLowerCase() == '/';
+        const isPressed = e.key.toLowerCase() === '/';
   
         if (isAltPressed && isPressed) {
           state.showNavbar = !state.showNavbar;

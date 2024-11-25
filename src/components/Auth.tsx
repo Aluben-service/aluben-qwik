@@ -1,4 +1,4 @@
-
+/*
 import { component$, useStore, $ } from '@builder.io/qwik';
 import { login, signUp, logout } from '~/services/auth';
 import { auth } from '~/services/firebase'; // Import Firebase auth instance
@@ -92,5 +92,143 @@ export const Auth = component$(() => {
         </button>
       </div>
     </div>
+  );
+});
+*/
+import { $, component$ } from "@builder.io/qwik";
+import { createClient } from '@supabase/supabase-js';
+import { useSignal } from "@builder.io/qwik";
+
+const supabase = createClient(
+  import.meta.env.PUBLIC_SUPABASE_URL,
+  import.meta.env.PUBLIC_SUPABASE_API_KEY
+);
+
+export const Auth = component$(() => {
+  const email = useSignal('');
+  const password = useSignal('');
+  const errorMessage = useSignal('');
+
+  const handleSignUp = $(async () => {
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: email.value,
+        password: password.value,
+      });
+
+      if (error) throw error;
+      console.log('Signup successful:', data);
+    } catch (error: unknown) {
+      errorMessage.value = (error as Error).message;
+    }
+  });
+
+  const handleLogin = $(async () => {
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email.value,
+        password: password.value,
+      });
+
+      if (error) throw error;
+      console.log('Login successful:', data);
+    } catch (error: unknown) {
+      errorMessage.value = (error as Error).message;
+    }
+  });
+
+  const handleLogout = $(async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      errorMessage.value = error.message;
+    }
+  });
+
+  /* Commented out OAuth providers
+  const handleGoogleLogin = $(async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google'
+    });
+    if (error) errorMessage.value = error.message;
+  });
+
+  const handleGithubLogin = $(async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'github'
+    });
+    if (error) errorMessage.value = error.message;
+  });
+  */
+
+  return (
+    <>
+    <div class="flex flex-col gap-4 w-full max-w-md mx-auto p-6">
+      {errorMessage.value && (
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+          {errorMessage.value}
+        </div>
+      )}
+      <input
+        type="email"
+        placeholder="Email"
+        value={email.value}
+        onInput$={(e) => {
+          const target = e.target as HTMLInputElement;
+          email.value = target.value;
+        }}
+        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password.value}
+        onInput$={(e) => {
+          const target = e.target as HTMLInputElement;
+          password.value = target.value;
+        }}
+        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <div class="flex flex-col gap-2 w-full">
+        <button 
+          type="button"
+          onClick$={handleSignUp}
+          class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+        >
+          Sign Up
+        </button>
+        <button 
+          type="button"
+          onClick$={handleLogin}
+          class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
+        >
+          Login
+        </button>
+        <button 
+          type="button"
+          onClick$={handleLogout}
+          class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
+        >
+          Logout
+        </button>
+      </div>
+      
+      {/* Commented out OAuth buttons
+      <div class="flex flex-col gap-2 w-full mt-4">
+        <button 
+          onClick$={handleGoogleLogin}
+          class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+        >
+          Login with Google
+        </button>
+        <button 
+          onClick$={handleGithubLogin}
+          class="px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-900 transition-colors"
+        >
+          Login with GitHub
+        </button>
+      </div>
+      */}
+    </div>
+    </>
   );
 });

@@ -1,19 +1,20 @@
+
 // src/services/firebase.ts
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getPerformance } from "firebase/performance";
-import { getFirestore, collection, getDocs, query, orderBy } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
 
 
 const firebaseConfig = {
   apiKey: import.meta.env.PUBLIC_FIREBASE_API_KEY,
-  authDomain: "aluben-2794e.firebaseapp.com",
-  projectId: "aluben-2794e",
-  storageBucket: "aluben-2794e.firebasestorage.app",
-  messagingSenderId: "851804241341",
-  appId: "1:851804241341:web:9c74e26bc5c338ab0b26d4",
-  measurementId: "G-VQHMN7DCGN",
+  authDomain: import.meta.env.PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.PUBLIC_FIREBASE_APP_ID,
+  measurementId: import.meta.env.PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
