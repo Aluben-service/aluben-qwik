@@ -24,6 +24,11 @@ errorOnDuplicatesPkgDeps(devDependencies, dependencies);
  */
 export default defineConfig(({ command, mode }): UserConfig => {
   return {
+    build: {
+      rollupOptions: {
+        external: ['sweetalert2'],
+      },
+    },
     define: {
       // (optional) enables debugging in workbox
       "process.env.NODE_ENV": JSON.stringify("development"),

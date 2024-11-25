@@ -56,13 +56,13 @@
     "qwik": "qwik"
   },
   "devDependencies": {
-    "@angular/compiler": "^16.2.2",
-    "@angular/compiler-cli": "^16.2.2",
+    "@angular/compiler": "^16.2.12",
+    "@angular/compiler-cli": "^16.2.12",
     "@biomejs/biome": "^1.9.4",
-    "@builder.io/qwik": "^1.10.0",
-    "@builder.io/qwik-city": "^1.10.0",
+    "@builder.io/qwik": "^1.11.0",
+    "@builder.io/qwik-city": "^1.11.0",
     "@catppuccin/tailwindcss": "^0.1.6",
-    "@netlify/edge-functions": "^2.11.0",
+    "@netlify/edge-functions": "^2.11.1",
     "@playwright/test": "^1.49.0",
     "@qwikdev/pwa": "^0.0.4",
     "@qwikest/icons": "^0.0.13",
@@ -72,22 +72,22 @@
     "@typescript-eslint/parser": "7.16.1",
     "autoprefixer": "^10.4.20",
     "chemicaljs": "^2.5.1",
-    "eslint-plugin-qwik": "^1.10.0",
-    "express": "^4.18.2",
+    "eslint-plugin-qwik": "^1.11.0",
+    "express": "^4.21.1",
     "netlify-cli": "^15.11.0",
-    "nx": "^20.1.2",
+    "nx": "^20.1.3",
     "postcss": "^8.4.49",
     "prettier": "3.3.3",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "sass": "^1.81.0",
     "tailwindcss": "^3.4.15",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "<5.6.0",
+    "typescript": "^5.5.4",
     "vite": "5.3.6",
     "vite-tsconfig-paths": "^4.3.2"
   },
   "dependencies": {
-    "@angular/localize": "^16.2.2",
+    "@angular/localize": "^16.2.12",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
@@ -99,9 +99,9 @@
     "jquery": "4.0.0-beta.2",
     "localforage": "^1.10.0",
     "lucide-react": "^0.460.0",
-    "tailwind-merge": "^2.5.4",
+    "tailwind-merge": "^2.5.5",
     "wisp-server-node": "^1.1.7",
-    "compression": "^1.7.4"
+    "compression": "^1.7.5"
   },
   "resolutions": {
     "sharp": "0.32.6"
