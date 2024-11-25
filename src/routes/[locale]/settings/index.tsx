@@ -27,13 +27,13 @@ export default component$(() => {
 
   return (
     <div class={styles.settingsContainer}>
-      <h1>Settings</h1>
+      <h1>{$localize`Settings`}</h1>
       
       <main class={styles.settingsGrid}>
         <section class={styles.settingSection}>
-          <h2>Proxy Settings</h2>
+          <h2>{$localize`Proxy Settings`}</h2>
           <div class={styles.settingItem}>
-            <label for="service-select">Service:</label>
+            <label for="service-select">{$localize`Service`}:</label>
             <select 
               id="service-select"
               value={service.value}
@@ -51,7 +51,7 @@ export default component$(() => {
           </div>
 
           <div class={styles.settingItem}>
-            <label for="transport-select">Transport:</label>
+            <label for="transport-select">{$localize`Transport`}:</label>
             <select
               id="transport-select"
               value={transport.value}
@@ -67,7 +67,7 @@ export default component$(() => {
           </div>
 
           <div class={styles.settingItem}>
-            <label for="auto-https-checkbox">Auto HTTPS:</label>
+            <label for="auto-https-checkbox">{$localize`Auto HTTPS`}:</label>
             <label class={styles.toggle} style={{ flexDirection: "row-reverse" }}>
               <input
                 type="checkbox"
@@ -84,10 +84,10 @@ export default component$(() => {
         </section>
 
         <section class={styles.settingSection}>
-          <h2>Accessibility</h2>
+          <h2>{$localize`Accessibility`}</h2>
           
           <div class={styles.settingItem}>
-            <label for="high-contrast-checkbox">High Contrast Mode:</label>
+            <label for="high-contrast-checkbox">{$localize`High Contrast Mode`}:</label>
             <label class={styles.toggle} style={{ flexDirection: "row-reverse" }}>
               <input
                 id="high-contrast-checkbox"
@@ -104,7 +104,7 @@ export default component$(() => {
           </div>
 
           <div class={styles.settingItem}>
-            <label for="font-size-select">Font Size:</label>
+            <label for="font-size-select">{$localize`Font Size`}:</label>
             <select
               id="font-size-select"
               value={fontSize.value}
@@ -122,10 +122,10 @@ export default component$(() => {
         </section>
 
         <section class={styles.settingSection}>
-          <h2>Quality of Life</h2>
+          <h2>{$localize`Quality of Life`}</h2>
 
           <div class={styles.settingItem}>
-            <label for="search-engine-select">Search Engine:</label>
+            <label for="search-engine-select">{$localize`Search Engine`}:</label>
             <select
               id="search-engine-select"
               value={searchEngine.value}
@@ -143,7 +143,7 @@ export default component$(() => {
           </div>
 
           <div class={styles.settingItem}>
-            <label for="animations-toggle">Animations:</label>
+            <label for="animations-toggle">{$localize`Animations`}:</label>
             <label class={styles.toggle} style={{ flexDirection: "row-reverse" }}>
               <input
                 id="animations-toggle"

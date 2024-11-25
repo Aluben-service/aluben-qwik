@@ -31,26 +31,34 @@
   "type": "module",
   "scripts": {
     "build": "qwik build",
-    "build.client": "vite build",
+    "build.client": "vite build && npm run i18n-translate",
+    "build.css": "sass --watch public/stylesheets/:public/css",
     "build.preview": "vite build --ssr src/entry.preview.tsx",
-    "build.server": "vite build -c adapters/netlify-edge/vite.config.ts",
+    "build.sserver": "vite build -c adapters/netlify-edge/vite.config.ts",
+    "build.server": "vite build --ssr src/entry.express.tsx",
     "build.server.vercel": "vite build -c adapters/vercel-edge/vite.config.ts",
     "build.types": "tsc --incremental --noEmit",
     "deploy": "netlify deploy",
     "deploy.vercel": "vercel deploy",
     "dev": "vite --mode ssr",
     "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
+    "fix": "bunx biome check --apply .",
     "fmt": "prettier --write .",
     "fmt.check": "prettier --check .",
     "generate": "pwa-assets-generator --preset minimal-2023 public/logo.svg",
+    "i18n-extract": "node_modules/.bin/localize-extract -s \"dist/build/*.js\" -f json -o src/locales/message.en.json",
+    "i18n-translate": "node_modules/.bin/localize-translate -s \"*.js\" -t src/locales/message.*.json -o dist/build/{{LOCALE}} -r ./dist/build",
+    "prei18n-extract": "vite build",
     "preview": "qwik build preview && vite preview --open",
-    "qwik": "qwik",
     "start": "vite --open --mode ssr",
     "test:e2e": "playwright test",
-    "fix": "bunx biome check --apply .",
-    "build.css": "sass --watch public/stylesheets/:public/css"
+    "serve": "node server/entry.express",
+    "qwik": "qwik"
   },
   "devDependencies": {
+    "@angular/compiler": "^16.2.2",
+    "@angular/compiler-cli": "^16.2.2",
+    "@biomejs/biome": "^1.9.4",
     "@builder.io/qwik": "^1.10.0",
     "@builder.io/qwik-city": "^1.10.0",
     "@catppuccin/tailwindcss": "^0.1.6",
@@ -65,6 +73,7 @@
     "autoprefixer": "^10.4.20",
     "chemicaljs": "^2.5.1",
     "eslint-plugin-qwik": "^1.10.0",
+    "express": "^4.18.2",
     "netlify-cli": "^15.11.0",
     "nx": "^20.1.2",
     "postcss": "^8.4.49",
@@ -74,11 +83,11 @@
     "tailwindcss": "^3.4.15",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "<5.6.0",
-    "@biomejs/biome": "^1.9.4",
     "vite": "5.3.6",
     "vite-tsconfig-paths": "^4.3.2"
   },
   "dependencies": {
+    "@angular/localize": "^16.2.2",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
@@ -91,7 +100,8 @@
     "localforage": "^1.10.0",
     "lucide-react": "^0.460.0",
     "tailwind-merge": "^2.5.4",
-    "wisp-server-node": "^1.1.7"
+    "wisp-server-node": "^1.1.7",
+    "compression": "^1.7.4"
   },
   "resolutions": {
     "sharp": "0.32.6"

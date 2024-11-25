@@ -5,6 +5,7 @@ import { WebFrame } from "~/components/WebFrame";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import localforage from "localforage";
 
+
 interface Store {
   web: string | null;
   bookmarks: Array<string>;
@@ -39,10 +40,10 @@ export default component$(() => {
         {store.showOnboarding && (
           <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div class="bg-gray-800 p-6 rounded-lg max-w-md">
-              <h2 class="text-xl text-white mb-4">Welcome to Aluben!</h2>
-              <p class="text-gray-300 mb-4">Here are some helpful shortcuts to get you started:</p>
+              <h2 class="text-xl text-white mb-4">{$localize`Welcome to Aluben!`}</h2>
+              <p class="text-gray-300 mb-4">{$localize`Here are some helpful shortcuts to get you started:`}</p>
               <ul class="text-gray-300 mb-6 space-y-2">
-                <li>• Press <kbd class="bg-gray-700 px-2 py-1 rounded">Ctrl</kbd> + <kbd class="bg-gray-700 px-2 py-1 rounded">/</kbd> to toggle the navigation bar</li>
+                <li>• {$localize`Press`} <kbd class="bg-gray-700 px-2 py-1 rounded">Ctrl</kbd> + <kbd class="bg-gray-700 px-2 py-1 rounded">/</kbd> {$localize`to toggle the navigation bar`}</li>
               </ul>
               <button
                 type="button"
@@ -52,7 +53,7 @@ export default component$(() => {
                 }}
                 class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
               >
-                Got it!
+                {$localize`Got it!`}
               </button>
             </div>
           </div>

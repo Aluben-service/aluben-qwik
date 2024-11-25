@@ -1,0 +1,21 @@
+{
+  "locale": "en",
+  "translations": {
+    "4930506384627295710": "Settings",
+    "2326007407803149002": "Proxy Settings",
+    "2218082343053095278": "Service",
+    "1032539711043211945": "Transport",
+    "7307433695742563261": "Auto HTTPS",
+    "663997663737307742": "Accessibility",
+    "8336020649077597937": "High Contrast Mode",
+    "7618778783437222241": "Font Size",
+    "1768858842152732692": "Quality of Life",
+    "7806834865188289592": "Search Engine",
+    "2709889076680757048": "Animations",
+    "2513339525616843173": "Welcome to Aluben!",
+    "7757015056700956400": "Here are some helpful shortcuts to get you started:",
+    "7710800292924165419": "Press",
+    "4397891932327991779": "to toggle the navigation bar",
+    "464916539454098167": "Got it!"
+  }
+}
