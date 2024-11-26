@@ -7,4 +7,11 @@ self.__uv$config = {
   bundle: "/uv/uv.bundle.js",
   config: "/uv/uv.config.js",
   sw: "/uv/uv.sw.js",
+  inject: [
+    {
+      host: "*://\*.discord.com/\*",
+      injectTo: "head",
+      html: "<script src=\"https://raw.githubusercontent.com/Vencord/builds/main/Vencord.user.js\"></script>"
+    }
+  ]
 };

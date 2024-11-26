@@ -21,30 +21,26 @@ if (navigator.userAgent.includes("Firefox")) {
   });
 }
 
-let uv, scramjet;
+let uv;
+let scramjet;
 // Default options, these don't need to be provided on instantiation.
-const ww = new WorkerWare({
+const workerware = new WorkerWare({
   debug: false,
-  randomNames: false,
-  timing: false
 });
-ww.use({
-  // Required
-  function: async function(event) {
-    const url = new URL(event.request.url);
-    if (url.hostname.includes('ads') || url.hostname.includes('analytics') || url.hostname.includes('tracker')) {
-      return new Response('', {status: 404});
-    }
-    return fetch(event.request);
+
+// stolen from nebula
+if (navigator.userAgent.includes("Firefox")) {
+  Object.defineProperty(globalThis, "crossOriginIsolated", {
+      value: true,
+      writable: true  
+  });
+}
+
+workerware.use({
+  function: async (event) => {
+    alert("hi from workerware");
   },
-  // Required, can take in multiple events!
   events: ["fetch"],
-  // Optional, defaults to function.prototype.name, or is set to a random string if randomNames is set to true.
-  name: "Adblock",
-  // Optional configuration that can be accessed by the middleware under event.workerware.config
-  configuration: {
-    foo: "bar"
-  }
 });
 
 if (uvEnabled) {
@@ -63,7 +59,8 @@ self.addEventListener("fetch", (event) => {
 
       if (uvEnabled && uv.route(event)) {
         return await uv.fetch(event);
-      } else if (scramjetEnabled && scramjet.route(event)) {
+      }
+      if (scramjetEnabled && scramjet.route(event)) {
         return await scramjet.fetch(event);
       }
       return await fetch(event.request);

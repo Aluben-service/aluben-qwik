@@ -10,6 +10,7 @@ import { qwikPwa } from "@qwikdev/pwa";
 import { ChemicalVitePlugin } from "chemicaljs";
 import tsconfigPaths from "vite-tsconfig-paths";
 import pkg from "./package.json";
+import { qwikSpeakInline } from 'qwik-speak/inline';
 
 type PkgDep = Record<string, string>;
 const { dependencies = {}, devDependencies = {} } = pkg as any as {
@@ -44,6 +45,11 @@ export default defineConfig(({ command, mode }): UserConfig => {
           meteor: true,
           scramjet: true
         }
+      }),
+      qwikSpeakInline({
+        supportedLangs: ['en-US', 'ar-EG'],
+        defaultLang: 'en-US',
+        assetsPath: 'src/i18n'
       })
     ],
     // This tells Vite which dependencies to pre-build in dev mode.

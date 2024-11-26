@@ -10,22 +10,34 @@
  * - npm run build
  *
  */
+import { isDev } from "@builder.io/qwik/build";
 import {
   renderToStream,
+  type RenderOptions,
   type RenderToStreamOptions,
 } from "@builder.io/qwik/server";
 import { manifest } from "@qwik-client-manifest";
 import Root from "./root";
-import { extractBase } from "./i18n";
+import { config } from "./speak-config";
+
+export function extractBase({
+  serverData,
+}: RenderOptions): string {
+  if (!isDev && serverData?.locale) {
+    return `/build/${serverData.locale}`;
+  }
+  return "/build";
+}
 
 export default function (opts: RenderToStreamOptions) {
+  const lang = opts.serverData?.locale || config.defaultLocale.lang;
+
   return renderToStream(<Root />, {
     manifest,
     ...opts,
-    base: extractBase, // determine the base URL for the client code
-    // Use container attributes to set attributes on the html tag.
+    base: extractBase,
     containerAttributes: {
-      lang: opts.serverData?.locale ?? "en-us",
+      lang,
       ...opts.containerAttributes,
     },
   });

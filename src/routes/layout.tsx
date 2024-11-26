@@ -1,7 +1,10 @@
 import { component$, Slot } from "@builder.io/qwik";
 import type { RequestHandler } from "@builder.io/qwik-city";
+import { InvisibleNav } from "~/components/InvisibleNav";
+import { config } from "~/speak-config";
 
-export const onGet: RequestHandler = async ({ cacheControl }) => {
+export const onGet: RequestHandler = async ({ cacheControl, params,
+  send, }) => {
   // Control caching for this request for best performance and to reduce hosting costs:
   // https://qwik.dev/docs/caching/
   cacheControl({
@@ -10,8 +13,20 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
     // Max once every 5 seconds, revalidate on the server to get a fresh version of this page
     maxAge: 5,
   });
+  if (
+    !config.supportedLocales.find(
+      (loc) => loc.lang === params.lang,
+    )
+  ) {
+    send(404, "Not Found");
+  }
 };
 
 export default component$(() => {
-  return <Slot />;
+  return (
+    <>
+      <InvisibleNav />
+      <Slot />
+    </>
+  );
 });

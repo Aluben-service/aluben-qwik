@@ -2,8 +2,11 @@ import { component$, useStore, useVisibleTask$ } from "@builder.io/qwik";
 import { Controls } from "~/components/Controls/";
 import { Sidebar } from "~/components/Sidebar";
 import { WebFrame } from "~/components/WebFrame";
-import type { DocumentHead } from "@builder.io/qwik-city";
+import { useLocation, useNavigate, type DocumentHead} from "@builder.io/qwik-city";
 import localforage from "localforage";
+import $ from "jquery";
+import { translate } from "~/lib/utils";
+import { config } from "~/speak-config";
 
 
 interface Store {
@@ -14,7 +17,17 @@ interface Store {
   showOnboarding: boolean | null;
 }
 
+
 export default component$(() => {
+
+  const { lang } = useLocation().params;
+  const navigate = useNavigate();
+
+  if (!lang) {
+    navigate(config.defaultLocale.lang); // Redirect to "/en" if lang is undefined
+    return null;
+  }
+
   const store = useStore<Store>({
     web: null,
     bookmarks: [],
@@ -36,24 +49,25 @@ export default component$(() => {
       <main class={"flex flex-1 mt-10"} id="container">
         {store.sidebarVisible ? <Sidebar store={store} /> : null}
         <WebFrame store={store} />
-        
+
         {store.showOnboarding && (
           <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div class="bg-gray-800 p-6 rounded-lg max-w-md">
-              <h2 class="text-xl text-white mb-4">{$localize`Welcome to Aluben!`}</h2>
-              <p class="text-gray-300 mb-4">{$localize`Here are some helpful shortcuts to get you started:`}</p>
+              <h2 class="text-xl text-white mb-4">Welcome to Aluben!</h2>
+              <p class="text-gray-300 mb-4">Here are some helpful shortcuts to get you started:</p>
               <ul class="text-gray-300 mb-6 space-y-2">
-                <li>• {$localize`Press`} <kbd class="bg-gray-700 px-2 py-1 rounded">Ctrl</kbd> + <kbd class="bg-gray-700 px-2 py-1 rounded">/</kbd> {$localize`to toggle the navigation bar`}</li>
+                <li>• Press <kbd class="bg-gray-700 px-2 py-1 rounded">Ctrl</kbd> + <kbd class="bg-gray-700 px-2 py-1 rounded">/</kbd> to toggle the navigation bar</li>
               </ul>
               <button
                 type="button"
                 onClick$={async () => {
                   store.showOnboarding = false;
                   await localforage.setItem('hasSeenOnboarding', true);
+                  $('#container').fadeIn(400);
                 }}
                 class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
               >
-                {$localize`Got it!`}
+                {translate('confirm')}
               </button>
             </div>
           </div>
@@ -74,8 +88,9 @@ export const head: DocumentHead = {
       content: "A clean and simple proxy browser built with Qwik.",
     },
     {
-      name: "keywords", 
+      name: "keywords",
       content: "qwik, aluben, proxy, browser, uv, ultraviolet, rammerhead, rh",
     },
   ],
 };
+
