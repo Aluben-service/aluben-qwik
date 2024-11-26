@@ -2,11 +2,10 @@ import { component$, useStore, useVisibleTask$ } from "@builder.io/qwik";
 import { Controls } from "~/components/Controls/";
 import { Sidebar } from "~/components/Sidebar";
 import { WebFrame } from "~/components/WebFrame";
-import { useLocation, useNavigate, type DocumentHead} from "@builder.io/qwik-city";
+import type { DocumentHead } from "@builder.io/qwik-city";
 import localforage from "localforage";
 import $ from "jquery";
 import { translate } from "~/lib/utils";
-import { config } from "~/speak-config";
 
 
 interface Store {
@@ -19,14 +18,6 @@ interface Store {
 
 
 export default component$(() => {
-
-  const { lang } = useLocation().params;
-  const navigate = useNavigate();
-
-  if (!lang) {
-    navigate(config.defaultLocale.lang); // Redirect to "/en" if lang is undefined
-    return null;
-  }
 
   const store = useStore<Store>({
     web: null,
@@ -67,7 +58,7 @@ export default component$(() => {
                 }}
                 class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
               >
-                {translate('confirm')}
+                {translate`confirm`}
               </button>
             </div>
           </div>

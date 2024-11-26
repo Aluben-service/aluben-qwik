@@ -1,19 +1,8 @@
-import { component$ } from "@builder.io/qwik";
-import type { RequestHandler } from "@builder.io/qwik-city";
-import { config } from "~/speak-config";
+import type {RequestHandler} from '@builder.io/qwik-city'
+import {guessLocale} from 'compiled-i18n'
 
-/*export const onGet: RequestHandler = async ({
-    params,
-    redirect,
-}) => {
-    if (!params.lang) {
-        throw redirect(301, `/${config.defaultLocale.lang}/`);
-    }
-};*/
-
-export default component$(() => {
-    return (
-        <h1>Hello World</h1>
-    );
-}); 
-
+export const onGet: RequestHandler = async ({request, redirect, url}) => {
+	const acceptLang = request.headers.get('accept-language')
+	const guessedLocale = guessLocale(acceptLang)
+	throw redirect(301, `/${guessedLocale}/${url.search}`)
+}

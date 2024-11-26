@@ -1,3 +1,3 @@
-import { inlineTranslate } from "qwik-speak";
+import { _ } from 'compiled-i18n'
 
-export const translate = inlineTranslate();
+export const translate = _

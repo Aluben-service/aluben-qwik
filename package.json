@@ -78,7 +78,6 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.7.2",
     "vite": "5.3.6",
-    "qwik-speak": "^0.23.0",
     "vite-tsconfig-paths": "^4.3.2"
   },
   "dependencies": {
@@ -89,6 +88,7 @@
     "@supabase/supabase-js": "^2.46.1",
     "@types/jquery": "^3.5.32",
     "class-variance-authority": "^0.7.0",
+    "compiled-i18n": "^1.0.3",
     "compression": "^1.7.5",
     "firebase": "^11.0.2",
     "firebaseui": "^6.1.0",

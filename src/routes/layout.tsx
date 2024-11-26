@@ -1,32 +1,47 @@
-import { component$, Slot } from "@builder.io/qwik";
-import type { RequestHandler } from "@builder.io/qwik-city";
-import { InvisibleNav } from "~/components/InvisibleNav";
-import { config } from "~/speak-config";
+import {component$, Slot} from '@builder.io/qwik'
+import type {RequestHandler} from '@builder.io/qwik-city'
+import {guessLocale, locales} from 'compiled-i18n'
+import { InvisibleNav } from '~/components/InvisibleNav'
 
-export const onGet: RequestHandler = async ({ cacheControl, params,
-  send, }) => {
-  // Control caching for this request for best performance and to reduce hosting costs:
-  // https://qwik.dev/docs/caching/
-  cacheControl({
-    // Always serve a cached response by default, up to a week stale
-    staleWhileRevalidate: 60 * 60 * 24 * 7,
-    // Max once every 5 seconds, revalidate on the server to get a fresh version of this page
-    maxAge: 5,
-  });
-  if (
-    !config.supportedLocales.find(
-      (loc) => loc.lang === params.lang,
-    )
-  ) {
-    send(404, "Not Found");
-  }
-};
+const replaceLocale = (pathname: string, oldLocale: string, locale: string) => {
+	const idx = pathname.indexOf(oldLocale)
+	return (
+		pathname.slice(0, idx) + locale + pathname.slice(idx + oldLocale.length)
+	)
+}
+
+export const onRequest: RequestHandler = async ({
+	request,
+	url,
+	redirect,
+	pathname,
+	params,
+	locale,
+}) => {
+	if (locales.includes(params.locale)) {
+		// Set the locale for this request
+		locale(params.locale)
+	} else {
+		const acceptLang = request.headers.get('accept-language')
+		// Redirect to the correct locale
+		const guessedLocale = guessLocale(acceptLang)
+		const path =
+			// You can use `__` as the locale in URLs to auto-select it
+			params.locale === '__' ||
+			/^([a-z]{2})([_-]([a-z]{2}))?$/i.test(params.locale)
+				? // invalid locale
+					`/${replaceLocale(pathname, params.locale, guessedLocale)}`
+				: // no locale
+					`/${guessedLocale}${pathname}`
+		throw redirect(301, `${path}${url.search}`)
+	}
+}
 
 export default component$(() => {
-  return (
-    <>
-      <InvisibleNav />
-      <Slot />
-    </>
-  );
-});
+	return (
+		<>
+			<InvisibleNav />
+			<Slot />
+		</>
+	)
+})

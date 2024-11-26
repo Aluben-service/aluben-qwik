@@ -1,5 +1,8 @@
 import { component$ } from "@builder.io/qwik";
-import { LocLink } from "../i18n/loc-link";
+import { Link } from "@builder.io/qwik-city";
+import { translate } from "~/lib/utils";
+
+
 export const Navbar = component$(() => {
   
   return (
@@ -7,12 +10,12 @@ export const Navbar = component$(() => {
       <div class="flex flex-col items-center space-y-4">
         <div class="text-2xl font-bold mb-4">Aluben</div>
         <div class="flex flex-col space-y-3">
-          <LocLink href="/" class="hover:text-gray-300 text-center">
-            Home
-          </LocLink>
-          <LocLink href="/settings/" class="hover:text-gray-300 text-center">
+          <Link href="/" class="hover:text-gray-300 text-center">
+            {translate`Home`}
+          </Link>
+          <Link href="/settings/" class="hover:text-gray-300 text-center">
             Settings
-          </LocLink>
+          </Link>
           {/*
           <Link href="/leaderboard/" class="hover:text-gray-300 text-center">
             Leaderboard(WIP)

@@ -10,35 +10,33 @@
  * - npm run build
  *
  */
-import { isDev } from "@builder.io/qwik/build";
 import {
   renderToStream,
-  type RenderOptions,
   type RenderToStreamOptions,
 } from "@builder.io/qwik/server";
 import { manifest } from "@qwik-client-manifest";
 import Root from "./root";
-import { config } from "./speak-config";
+import {extractBase, setSsrLocaleGetter} from 'compiled-i18n/qwik'
 
-export function extractBase({
-  serverData,
-}: RenderOptions): string {
-  if (!isDev && serverData?.locale) {
-    return `/build/${serverData.locale}`;
-  }
-  return "/build";
-}
+// +++ Allow compiled-i18n to get the current SSR locale
+setSsrLocaleGetter()
 
 export default function (opts: RenderToStreamOptions) {
-  const lang = opts.serverData?.locale || config.defaultLocale.lang;
+	return renderToStream(<Root />, {
+		manifest,
+		...opts,
 
-  return renderToStream(<Root />, {
-    manifest,
-    ...opts,
-    base: extractBase,
-    containerAttributes: {
-      lang,
-      ...opts.containerAttributes,
-    },
-  });
+		// +++ Configure the base path for assets
+		base: extractBase,
+
+		// Use container attributes to set attributes on the html tag.
+		containerAttributes: {
+			// +++ Set the HTML lang attribute to the SSR locale
+			lang: opts.serverData?.locale,
+
+			...opts.containerAttributes,
+		},
+	})
 }
+
+
