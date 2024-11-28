@@ -1,4 +1,3 @@
-
 /**
  * This is the base config for vite.
  * When building, the adapter config is used which loads this file and extends it.
@@ -10,8 +9,9 @@ import { qwikPwa } from "@qwikdev/pwa";
 import { ChemicalVitePlugin } from "chemicaljs";
 import tsconfigPaths from "vite-tsconfig-paths";
 import pkg from "./package.json";
-import {i18nPlugin} from 'compiled-i18n/vite'
-
+import { i18nPlugin } from "compiled-i18n/vite";
+import { partytownVite } from "@builder.io/partytown/utils";
+import { join } from "path";
 type PkgDep = Record<string, string>;
 const { dependencies = {}, devDependencies = {} } = pkg as any as {
   dependencies: PkgDep;
@@ -19,15 +19,15 @@ const { dependencies = {}, devDependencies = {} } = pkg as any as {
   [key: string]: unknown;
 };
 errorOnDuplicatesPkgDeps(devDependencies, dependencies);
-
 /**
  * Note that Vite normally starts from `index.html` but the qwikCity plugin makes start at `src/entry.ssr.tsx` instead.
  */
+
 export default defineConfig(({ command, mode }): UserConfig => {
   return {
     build: {
       rollupOptions: {
-        external: ['sweetalert2'],
+        external: ["sweetalert2"],
       },
     },
     define: {
@@ -35,20 +35,25 @@ export default defineConfig(({ command, mode }): UserConfig => {
       "process.env.NODE_ENV": JSON.stringify("development"),
     },
     plugins: [
-      qwikCity(), qwikVite(), tsconfigPaths(), qwikPwa({
+      qwikCity(),
+      qwikVite(),
+      tsconfigPaths(),
+      qwikPwa({
         /* options */
-      }), ChemicalVitePlugin({
-        default: 'uv',
+      }),
+      ChemicalVitePlugin({
+        default: "uv",
         uv: true,
         rammerhead: false,
         experimental: {
           meteor: true,
-          scramjet: true
-        }
+          scramjet: true,
+        },
       }),
       i18nPlugin({
-        locales: ['en', 'cn'],
-      })
+        locales: ["en", "cn"],
+      }),
+      partytownVite({ dest: join(__dirname, "dist", "~partytown") }),
     ],
     // This tells Vite which dependencies to pre-build in dev mode.
     optimizeDeps: {
@@ -71,7 +76,6 @@ export default defineConfig(({ command, mode }): UserConfig => {
     //         external: Object.keys(dependencies),
     //       }
     //     : undefined,
-
     server: {
       headers: {
         // Don't cache the server response in dev mode
@@ -86,9 +90,7 @@ export default defineConfig(({ command, mode }): UserConfig => {
     },
   };
 });
-
 // *** utils ***
-
 /**
  * Function to identify duplicate dependencies and throw an error
  * @param {Object} devDependencies - List of development dependencies
@@ -104,27 +106,22 @@ function errorOnDuplicatesPkgDeps(
   const duplicateDeps = Object.keys(devDependencies).filter(
     (dep) => dependencies[dep],
   );
-
   // include any known qwik packages
   const qwikPkg = Object.keys(dependencies).filter((value) =>
     /qwik/i.test(value),
   );
-
   // any errors for missing "qwik-city-plan"
   // [PLUGIN_ERROR]: Invalid module "@qwik-city-plan" is not a valid package
   msg = `Move qwik packages ${qwikPkg.join(", ")} to devDependencies`;
-
   if (qwikPkg.length > 0) {
     throw new Error(msg);
   }
-
   // Format the error message with the duplicates list.
   // The `join` function is used to represent the elements of the 'duplicateDeps' array as a comma-separated string.
   msg = `
     Warning: The dependency "${duplicateDeps.join(", ")}" is listed in both "devDependencies" and "dependencies".
     Please move the duplicated dependencies to "devDependencies" only and remove it from "dependencies"
   `;
-
   // Throw an error with the constructed message.
   if (duplicateDeps.length > 0) {
     throw new Error(msg);

@@ -6,6 +6,7 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 import localforage from "localforage";
 import $ from "jquery";
 import { translate } from "~/lib/utils";
+import { ThemeToggle } from "./a/theme-toggle";
 
 
 interface Store {
@@ -44,10 +45,11 @@ export default component$(() => {
         {store.showOnboarding && (
           <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div class="bg-gray-800 p-6 rounded-lg max-w-md">
-              <h2 class="text-xl text-white mb-4">Welcome to Aluben!</h2>
-              <p class="text-gray-300 mb-4">Here are some helpful shortcuts to get you started:</p>
+              <h2 class="text-xl text-white mb-4">{translate`onboarding.title`}</h2>
+              <p class="text-gray-300 mb-4">{translate`onboarding.description`}</p>
               <ul class="text-gray-300 mb-6 space-y-2">
-                <li>• Press <kbd class="bg-gray-700 px-2 py-1 rounded">Ctrl</kbd> + <kbd class="bg-gray-700 px-2 py-1 rounded">/</kbd> to toggle the navigation bar</li>
+                <li>{translate`onboarding.shortcut`}
+                  • Press <kbd class="bg-gray-700 px-2 py-1 rounded">Ctrl</kbd> + <kbd class="bg-gray-700 px-2 py-1 rounded">/</kbd> to toggle the navigation bar</li>
               </ul>
               <button
                 type="button"

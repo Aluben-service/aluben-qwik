@@ -14,14 +14,14 @@ export const RouterHead = component$(() => {
       <title>{head.title}</title>
       
       
-      <script src="/chemical.components.js" async defer></script>
+      <script src="/chemical.components.js" data-manual async defer />
       <script
         data-wisp-store
         data-transport-store
         src="/chemical.js"
         async
         defer
-      ></script>
+      />
 
       
       

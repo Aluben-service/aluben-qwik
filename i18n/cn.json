@@ -3,6 +3,9 @@
   "name": "cn",
   "translations": {
     "home": "家",
-    "confirm": "知道了！"
+    "confirm": "知道了！",
+    "onboarding.title": "欢迎来到Aluben！",
+    "onboarding.description": "以下是一些快捷键，帮助你快速上手：",
+    "onboarding.shortcut": "按下    <kbd>Ctrl</kbd> + <kbd>/</kbd> 打开导航栏"
   }
 }

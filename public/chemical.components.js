@@ -1,3 +1,5 @@
+
+
 class ChemicalInput extends HTMLInputElement {
   constructor() {
     super();
